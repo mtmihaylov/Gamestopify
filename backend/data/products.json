@@ -1,0 +1,47 @@
+[
+  {
+    "name": "SanDisk Ultra 128GB",
+    "price": "46",
+    "description": "Nice",
+    "ratings": 4.5,
+    "images": [{
+      "public_id": "products/134567890",
+      "url": "https://m.media-amazon.com/images/I/617NtexaW2L._AC_SS450_.jpg"
+    }],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numberOfReviews": 32,
+    "reviews": []
+  },
+  {
+    "name": "SanDisk Ultra 128GB 2",
+    "price": "69",
+    "description": "Nice",
+    "ratings": 4.9,
+    "images": [{
+      "public_id": "products/1345678901",
+      "url": "https://m.media-amazon.com/images/I/617NtexaW2L._AC_SS450_.jpg"
+    }],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numberOfReviews": 10,
+    "reviews": []
+  },
+  {
+    "name": "SanDisk Ultra 128GB 3",
+    "price": "20",
+    "description": "Nice",
+    "ratings": 4.0,
+    "images": [{
+      "public_id": "products/13456789012",
+      "url": "https://m.media-amazon.com/images/I/617NtexaW2L._AC_SS450_.jpg"
+    }],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numberOfReviews": 16,
+    "reviews": []
+  }
+]
