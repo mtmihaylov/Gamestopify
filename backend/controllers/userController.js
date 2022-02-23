@@ -3,7 +3,8 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwt');
 const sendEmail = require('../utils/sendEmail');
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { findByIdAndUpdate } = require('../models/user');
 
 // Register a user on api/v1/register
 exports.registerUser = catchAsyncErrors( async ( req, res, next ) => {
@@ -126,4 +127,51 @@ exports.resetPassword = catchAsyncErrors( async( req, res, next ) => {
   await user.save();
 
   sendToken(user, 200, res);
+})
+
+// Update/Change password on api/v1/password/update
+exports.updatePassword = catchAsyncErrors( async( req, res, next ) => {
+  const user = await User.findById(req.user.id).select('+password')
+
+  const isMatched = await user.comparePassword(req.body.currentPassword);
+
+  if (!isMatched) {
+    return next(new ErrorHandler('Current password is incorrect', 400))
+  }
+
+  user.password = req.body.newPassword;
+  await user.save();
+
+  sendToken(user, 200, res);
+})
+
+// Update user profile details on api/v1/myprofile/update
+exports.updateProfile = catchAsyncErrors( async( req, res, next ) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email
+  }
+
+  // TODO: Update avatar
+  
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false
+  })
+
+  res.status(200).json({
+    success: true,
+    user
+  })
+})
+
+// Get current user profile details on /api/v1/myprofile
+exports.getUserProfile = catchAsyncErrors( async( req, res, next ) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+    success: true,
+    user
+  })
 })
