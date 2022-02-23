@@ -14,7 +14,6 @@ module.exports = (err, req, res, next) => {
 
   if (process.env.NODE_ENV === "PRODUCTION") {
     let error = {...err};
-    console.log(error);
 
     error.message = err.message;
 
@@ -27,6 +26,24 @@ module.exports = (err, req, res, next) => {
     // Handling Mongoose Validation Error
     if (error.name === 'ValidationError') {
       const message = Object.values(error.errors).map(value => value.message)
+      error = new ErrorHandler(message, 400);
+    }
+
+    // Handling Mongoose duplicate key error
+    if (error.code === 11000) {
+      const message = `Someone's already using that ${Object.keys(error.keyValue)}`
+      error = new ErrorHandler(message, 400);
+    }
+
+    // Handling wrong JWT error
+    if (error.name === 'JsonWebTokenError') {
+      const message = `Invalid JSON web Token. Please try again.`
+      error = new ErrorHandler(message, 400);
+    }
+
+    // Handling expired JWT error
+    if (error.name === 'TokenExpiredError') {
+      const message = `Expired JSON web Token. Please try again.`
       error = new ErrorHandler(message, 400);
     }
 
