@@ -52,7 +52,7 @@ exports.loginUser = catchAsyncErrors( async(req, res, next) => {
 });
 
 // Logout user on /api/v1/logout
-exports.logout = catchAsyncErrors( async( req, res, next ) => {
+exports.logoutUser = catchAsyncErrors( async( req, res, next ) => {
   res.cookie('token', null, {
     expires: new Date(Date.now()),
     httpOnly: true
@@ -173,5 +173,72 @@ exports.getUserProfile = catchAsyncErrors( async( req, res, next ) => {
   res.status(200).json({
     success: true,
     user
+  })
+})
+
+/*
+  Admin Routes
+*/
+
+// Get all users on /api/v1/admin/users
+exports.getAllUsers = catchAsyncErrors( async( req, res, next ) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users
+  })
+})
+
+// Get user details on /api/v1/admin/user/:id
+exports.getUserDetails = catchAsyncErrors( async( req, res, next ) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 400))
+  }
+
+  res.status(200).json({
+    success: true,
+    user
+  })
+})
+
+// Update user profile details on api/v1/admin/user/:id
+exports.updateUser = catchAsyncErrors( async( req, res, next ) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  }
+
+  // TODO: Update avatar
+  
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false
+  })
+
+  res.status(200).json({
+    success: true,
+    user
+  })
+})
+
+// Delete user on /api/v1/admin/user/:id
+exports.deleteUser = catchAsyncErrors( async( req, res, next ) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 400))
+  }
+
+  // TODO: Remove avatar from cloudinary
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
   })
 })
