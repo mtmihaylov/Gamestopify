@@ -13,7 +13,7 @@ module.exports = (err, req, res, next) => {
   }
 
   if (process.env.NODE_ENV === "PRODUCTION") {
-    let error = {...err};
+    let error = {...err, name: err.name};
 
     error.message = err.message;
 
