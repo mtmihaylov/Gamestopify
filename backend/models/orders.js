@@ -30,8 +30,17 @@ const orderSchema = new mongoose.Schema({
     ref: 'User'
   },
   orderItems: [{
+    productId: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+      ref: 'Product'
+    },
     name: {
       type: String,
+      required: true
+    },
+    price: {
+      type: Number,
       required: true
     },
     quantity: {
@@ -41,15 +50,6 @@ const orderSchema = new mongoose.Schema({
     image: {
       type: String,
       required: true
-    },
-    price: {
-      type: Number,
-      required: true
-    },
-    product: {
-      type: mongoose.Schema.ObjectId,
-      required: true,
-      ref: 'Product'
     }
   }],
   paymentInfo: {
