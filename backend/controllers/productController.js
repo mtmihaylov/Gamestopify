@@ -81,8 +81,9 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-// Create / Update review on api/v1/review
+// Create / Update review on api/v1/review 
 exports.createReview = catchAsyncErrors( async( req, res, next) => {
+  // TODO: Make it with req.query.id?
   const { rating, comment, productId } = req.body;
 
   const review = {
@@ -116,5 +117,15 @@ exports.createReview = catchAsyncErrors( async( req, res, next) => {
 
   res.status(200).json({
     success: true
+  })
+})
+
+// Get product reviews on api/v1/reviews
+exports.getReviews = catchAsyncErrors( async( req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews
   })
 })
