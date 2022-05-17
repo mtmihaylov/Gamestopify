@@ -1,8 +1,11 @@
 import React from "react";
+import MetaData from "./layout/MetaData";
 
 const Home = () => {
   return (
     <div className="container container-fluid">
+      <MetaData title="Your shop for gaming, electronics and pop culture | GameStop" />
+
       <h1 id="products_heading">Latest Products</h1>
 
       <section id="products" className="container mt-5">
