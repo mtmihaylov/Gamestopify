@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
   return (
     <div className="col-sm-12 col-md-6 col-lg-3 my-3">
       <div className="card p-3 rounded">
-        <img className="card-img-top mx-auto" src={product.images[0].url} />
+        <Link className="card-img-top mx-auto" to={`product/${product._id}`}>
+          <img className="card-img-top mx-auto" src={product.images[0].url} alt="product preview"/>
+        </Link>
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">
             <Link to={`product/${product._id}`}>{product.name}</Link>
@@ -20,7 +22,11 @@ const Product = ({ product }) => {
             <span id="no_of_reviews">({product.numberOfReviews} Reviews)</span>
           </div>
           <p className="card-text">${product.price}</p>
-          <Link to={`product/${product._id}`} id="view_btn" className="btn btn-block">
+          <Link
+            to={`product/${product._id}`}
+            id="view_btn"
+            className="btn btn-block"
+          >
             View Details
           </Link>
         </div>
