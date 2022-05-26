@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import MetaData from "./layout/MetaData";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../actions/productsActions";
 
-import Product from './Product/Product';
+import Product from "./Product/Product";
+import Loader from "./layout/Loader";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,17 +20,22 @@ const Home = () => {
 
   return (
     <div className="container container-fluid">
-      <MetaData title="Your shop for gaming, electronics and pop culture | GameStop" />
+      {loading ? <Loader/> : (
+        <Fragment>
+          <MetaData title="Your shop for gaming, electronics and pop culture | GameStop" />
 
-      <h1 id="products_heading">Latest Products</h1>
+          <h1 id="products_heading">Latest Products</h1>
 
-      <section id="products" className="container mt-5">
-        <div className="row">
-          {products && products.map((product) => (
-              <Product key={product._id} product={product}/>
-            ))}
-        </div>
-      </section>
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {products &&
+                products.map((product) => (
+                  <Product key={product._id} product={product} />
+                ))}
+            </div>
+          </section>
+        </Fragment>
+      )}
     </div>
   );
 };
