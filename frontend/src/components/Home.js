@@ -1,13 +1,15 @@
 import React, { useEffect, Fragment } from "react";
+
 import MetaData from "./layout/MetaData";
-
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../actions/productsActions";
-
 import Product from "./Product/Product";
 import Loader from "./layout/Loader";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from 'react-alert'
+import { getProducts } from "../actions/productsActions";
+
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
 
   const { products, productsCount, loading, error } = useSelector(
@@ -15,8 +17,12 @@ const Home = () => {
   );
 
   useEffect(() => {
+    if (error) {
+      return alert.error(error);
+    }
+    
     dispatch(getProducts());
-  }, [dispatch]);
+  }, [dispatch, alert, error]);
 
   return (
     <div className="container container-fluid">
