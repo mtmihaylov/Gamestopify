@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
-import { useParams } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearErrors } from "../../actions/productsActions";
@@ -35,29 +35,38 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title={product.name}/>
           <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
               <Carousel pause="hover">
-                {product.images && product.images.map(image => (
-                  <Carousel.Item key={image.public_id}>
-                    <img className="d-block w-100 h-100" src={image.url} alt={product.title} />
-                  </Carousel.Item>
-                ))}
+                {product.images &&
+                  product.images.map((image) => (
+                    <Carousel.Item key={image.public_id}>
+                      <img
+                        className="d-block w-100 h-100"
+                        src={image.url}
+                        alt={product.title}
+                      />
+                    </Carousel.Item>
+                  ))}
               </Carousel>
             </div>
 
             <div className="col-12 col-lg-5 mt-5">
-              <h3>
-                {product.name}
-              </h3>
+              <h3>{product.name}</h3>
               <p id="product_id">Product # {product._id}</p>
 
               <hr />
 
               <div className="rating-outer">
-                <div className="rating-inner" style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
+                <div
+                  className="rating-inner"
+                  style={{ width: `${(product.ratings / 5) * 100}%` }}
+                ></div>
               </div>
-              <span id="no_of_reviews">({product.numberOfReviews} Reviews)</span>
+              <span id="no_of_reviews">
+                ({product.numberOfReviews} Reviews)
+              </span>
 
               <hr />
 
@@ -86,18 +95,24 @@ const ProductDetails = () => {
               <hr />
 
               <p>
-                Status: <span id="stock_status" className={product.stock > 0 ? 'greenColor' : 'redColor'}>{product.stock > 0 ? 'In Stock' : 'Sold Out'}</span>
+                Status:{" "}
+                <span
+                  id="stock_status"
+                  className={product.stock > 0 ? "greenColor" : "redColor"}
+                >
+                  {product.stock > 0 ? "In Stock" : "Sold Out"}
+                </span>
               </p>
 
               <hr />
 
               <h4 className="mt-2">Description:</h4>
-              <p>
-                {product.description}
-              </p>
+              <p>{product.description}</p>
               <hr />
 
-              <p id="product_seller mb-3">Sold By: <strong>{product.seller}</strong></p>
+              <p id="product_seller mb-3">
+                Sold By: <strong>{product.seller}</strong>
+              </p>
 
               {/* <!-- Button trigger modal --> */}
               <button
