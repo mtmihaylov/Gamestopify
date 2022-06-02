@@ -50,7 +50,7 @@ const Home = () => {
             </div>
           </section>
 
-          {productsCount >= productsPerPage && (
+          {productsCount > productsPerPage && (
             <div className="d-flex justify-content-center mt-5">
               <Pagination
                 activePage={currentPage}
