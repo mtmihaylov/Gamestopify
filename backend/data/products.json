@@ -1,7 +1,7 @@
 [
   {
     "name": "SanDisk Ultra 128GB",
-    "price": "46",
+    "price": 46,
     "description": "Nice",
     "ratings": 4.5,
     "images": [{
@@ -16,7 +16,7 @@
   },
   {
     "name": "SanDisk Ultra 128GB 2",
-    "price": "69",
+    "price": 69,
     "description": "Nice",
     "ratings": 4.9,
     "images": [{
@@ -31,7 +31,7 @@
   },
   {
     "name": "SanDisk Ultra 128GB 3",
-    "price": "20",
+    "price": 20,
     "description": "Nice",
     "ratings": 4.0,
     "images": [{
