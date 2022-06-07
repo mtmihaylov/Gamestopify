@@ -141,7 +141,7 @@ const ProductDetails = () => {
                       </h5>
                       <button
                         type="button"
-                        className="btn fa fa-times fa-lg"
+                        className="btn fa fa-times fa-lg pr-0"
                         data-bs-dismiss="modal"
                         aria-label="Close"
                       ></button>
