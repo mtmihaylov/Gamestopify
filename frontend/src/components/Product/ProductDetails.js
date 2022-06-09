@@ -73,7 +73,7 @@ const ProductDetails = () => {
               <p id="product_price">${product.price}</p>
 
               <div className="stockCounter d-inline">
-                <span className="btn btn-secondary minus">-</span>
+                <span className="btn btn-secondary minus main-color">-</span>
 
                 <input
                   type="number"
@@ -82,7 +82,7 @@ const ProductDetails = () => {
                   readOnly
                 />
 
-                <span className="btn btn-secondary plus">+</span>
+                <span className="btn btn-secondary plus main-color">+</span>
               </div>
               <button
                 type="button"

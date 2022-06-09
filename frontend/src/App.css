@@ -256,6 +256,10 @@ footer {
   border-radius: 25%;
 }
 
+.main-color {
+  background-color: #232f3e
+}
+
 #view_order_details {
   background-color: #fa9c23;
   border-color: #fa9c23;

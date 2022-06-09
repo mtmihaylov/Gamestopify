@@ -62,14 +62,14 @@ const Home = () => {
                 <Fragment>
                   <div className="col-6 col-md-3 my-5">
                     <div className="px-5">
-                      <div className="price-input">
+                      <div className="price-input mb-4">
                         <div className="field">
                           <input ref={minInputRef} type="number" className="input-min mr-1" placeholder="$Min"/>
                         </div>
                         <div className="field">
                           <input ref={maxInputRef} type="number" className="input-max ml-1" placeholder="$Max"/>
                         </div>
-                        <button className="btn btn-secondary ml-2">Go</button>
+                        <button className="btn btn-secondary ml-2 main-color">Go</button>
                       </div>
                       <Range
                         marks={{
@@ -83,6 +83,7 @@ const Home = () => {
                         pushable={100}
                         step={50}
                         onAfterChange={(price) => setPrice(price)}
+                        tipFormatter={value => `$${value}`}
                       />
                     </div>
                   </div>
