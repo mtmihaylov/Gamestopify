@@ -260,6 +260,16 @@ footer {
   background-color: #232f3e
 }
 
+.category {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.active {
+  color: #0089c7;
+  font-weight: bold;
+}
+
 #view_order_details {
   background-color: #fa9c23;
   border-color: #fa9c23;

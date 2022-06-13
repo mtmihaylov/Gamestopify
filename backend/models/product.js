@@ -47,11 +47,12 @@ const productSchema = new mongoose.Schema({
         "Men's Fashion",
         "Women's Fashion",
         "Home and Kitchen",
-        "Movies and Television",
+        "Movies/Television",
         "Pet Supplies",
-        "Sports and Outdoors",
+        "Sports",
         "Toys",
         "Books",
+        "Food"
       ],
       message: "Please select correct category for product",
     }
@@ -102,4 +103,7 @@ const productSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = {
+  Product: mongoose.model("Product", productSchema),
+  productSchema
+};
