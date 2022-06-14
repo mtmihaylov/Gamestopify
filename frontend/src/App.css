@@ -72,6 +72,11 @@ nav {
 
 .card {
   height: 100%;
+  transition: all .2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.07); 
 }
 
 .card-title a {
@@ -263,6 +268,13 @@ footer {
 .category {
   list-style-type: none;
   cursor: pointer;
+  transition: all .1s linear;
+  transform: perspective(1px) translateZ(0);
+  backface-visibility: hidden;
+}
+
+.category:hover {
+  transform: scale(1.05)
 }
 
 .active {
