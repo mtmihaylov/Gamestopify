@@ -10,19 +10,19 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productsConstants";
 
-export const getProducts = ( keyword, currentPage, price, category ) => async (dispatch) => {
+export const getProducts = ( keyword, currentPage, price, category, rating ) => async (dispatch) => {
   try {
     dispatch({type: ALL_PRODUCTS_REQUEST})
 
     let endPoint = `/api/v1/products?page=${currentPage}`
 
     if (keyword) {
-      endPoint = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+      endPoint = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating}`
     }
 
     if (category) 
     { 
-      endPoint = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
+      endPoint = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating}&category=${category}`
     }
 
     const { data } = await axios.get(endPoint)

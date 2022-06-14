@@ -22,6 +22,8 @@ const Home = () => {
   const [price, setPrice] = useState([1, 5000]);
   const [category, setCategory] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [rating, setRating] = useState(0);
+  const [activeRating, setActiveRating] = useState(0);
 
   const minInputRef = useRef(0);
   const maxInputRef = useRef(5000);
@@ -51,8 +53,8 @@ const Home = () => {
       return alert.error(error);
     }
 
-    dispatch(getProducts(keyword, currentPage, price, category));
-  }, [dispatch, alert, error, currentPage, keyword, price, category]);
+    dispatch(getProducts(keyword, currentPage, price, category, rating));
+  }, [dispatch, alert, error, currentPage, keyword, price, category, rating]);
 
   function handlePageChange(pageNumber) {
     setCurrentPage(pageNumber);
@@ -113,7 +115,7 @@ const Home = () => {
                       onAfterChange={(price) => setPrice(price)}
                       tipFormatter={(value) => `$${value}`}
                     />
-                    <hr className="my-5" />
+                    <hr className="mt-5 mb-4" />
                     <div className="mt-1">
                       <h4 className="mb-3">Categories</h4>
                       <ul className="pl-0">
@@ -134,11 +136,35 @@ const Home = () => {
                         ))}
                       </ul>
                     </div>
+                    <hr className="my-4" />
+                    <div className="mt-1">
+                      <h4 className="mb-3">Rating</h4>
+                      <ul className="pl-0">
+                      <li
+                            className={`rating-filter ${activeRating === 0 && 'active'}`}
+                            onClick={() => {setRating(0); setActiveRating(0);}}
+                          >
+                            All
+                          </li>
+                        {[5, 4, 3, 2, 1].map((star) => (
+                          <li
+                            key={star}
+                            className={`rating-filter ${activeRating === rating && 'active'}`}
+                            onClick={() => {setRating(star); setActiveRating(star);}}
+                          >
+                            <div className="rating-outer">
+                              <div className="rating-inner" style={{width: `${star * 20}%`}}>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div className="col-6 col-md-9">
                     <div className="row">
-                      {products.map((product) => (
+                      {products && products.map((product) => (
                         <ProductCard
                           key={product._id}
                           product={product}

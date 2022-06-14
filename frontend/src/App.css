@@ -265,7 +265,7 @@ footer {
   background-color: #232f3e
 }
 
-.category {
+.category, .rating-filter {
   list-style-type: none;
   cursor: pointer;
   transition: all .1s linear;
@@ -273,7 +273,7 @@ footer {
   backface-visibility: hidden;
 }
 
-.category:hover {
+.category:hover, .rating-filter:hover {
   transform: scale(1.05)
 }
 
