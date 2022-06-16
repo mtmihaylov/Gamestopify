@@ -13,9 +13,9 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    avatar: ""
   });
-  const { name, email, password } = user;
-  const [avatar, setAvatar] = useState("");
+  const { name, email, password, avatar } = user;
   const [avatarPreview, setAvatarPreview] = useState(
     "/images/avatar-default.png"
   );
@@ -58,7 +58,7 @@ const Register = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
-          setAvatar(reader.result);
+          setUser({ ...user, avatar: reader.result});
         }
       }
 
