@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import MetaData from "../layout/MetaData";
+import { Spinner } from "react-bootstrap";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
@@ -144,7 +145,9 @@ const Register = () => {
                 className="btn btn-block py-3"
                 disabled={loading ? true : false}
               >
-                REGISTER
+               { loading ? (
+                  <Spinner animation="border" variant="dark" />
+                ) : ('REGISTER') }
               </button>
             </form>
           </div>
