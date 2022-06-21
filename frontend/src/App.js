@@ -1,4 +1,4 @@
-import "./App.css";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/layout/Header";
@@ -10,7 +10,17 @@ import ProductDetails from "./components/Product/ProductDetails";
 import Login from "./components/User/Login";
 import Register from "./components/User/Register";
 
+import { loadUser } from "./actions/userActions";
+import { useDispatch } from "react-redux";
+
+import "./App.css";
+
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Header />

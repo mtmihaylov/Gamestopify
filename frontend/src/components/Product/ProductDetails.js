@@ -46,6 +46,7 @@ const ProductDetails = () => {
                         className="d-block w-100 h-100"
                         src={image.url}
                         alt={product.title}
+                        style={{maxHeight: '300px'}}
                       />
                     </Carousel.Item>
                   ))}
