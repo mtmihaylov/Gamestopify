@@ -35,8 +35,8 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(login(email, password))
-  }
+    dispatch(login(email, password));
+  };
 
   return (
     <>
@@ -58,7 +58,7 @@ function Login() {
                       id="email_field"
                       className="form-control"
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -69,9 +69,13 @@ function Login() {
                       id="password_field"
                       className="form-control"
                       value={password}
-                      onChange={e => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
+
+                  <Link to="/register" className="float-left mb-4">
+                    New User?
+                  </Link>
 
                   <Link to="/password/reset" className="float-right mb-4">
                     Forgot Password?
@@ -84,10 +88,6 @@ function Login() {
                   >
                     LOGIN
                   </button>
-
-                  <Link to="/register" className="float-right mt-3">
-                    New User?
-                  </Link>
                 </form>
               </div>
             </div>

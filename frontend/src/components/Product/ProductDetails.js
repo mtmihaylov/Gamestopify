@@ -119,8 +119,8 @@ const ProductDetails = () => {
                 id="review_btn"
                 type="button"
                 className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#ratingModal"
+                data-toggle="modal"
+                data-target="#ratingModal"
               >
                 Write a customer review
               </button>
