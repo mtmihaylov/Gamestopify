@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
+import { logout } from "../../actions/userActions";
 
 import Search from "./Search";
 
@@ -12,6 +13,11 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    alert.success("Logged out successfully");
+  };
 
   return (
     <Fragment>
@@ -39,7 +45,7 @@ const Header = () => {
           {user ? (
             <div className="dropdown ml-4 d-inline">
               <Link
-                to="#!"
+                to="#"
                 className="btn dropdown-toggle text-white mr-4"
                 type="button"
                 id="dropDownMenuButton"
@@ -54,7 +60,7 @@ const Header = () => {
                     alt={user.name}
                   />
                 </figure>
-                <span>{user.name?.split(' ')[0]}</span>
+                <span>{user.name?.split(" ")[0]}</span>
               </Link>
               <div
                 className="dropdown-menu dropdown-menu-right"
@@ -76,7 +82,11 @@ const Header = () => {
 
                 <div className="dropdown-divider"></div>
 
-                <Link to="/" className="dropdown-item text-danger">
+                <Link
+                  to="/"
+                  className="dropdown-item text-danger"
+                  onClick={logoutHandler}
+                >
                   Logout
                 </Link>
               </div>
