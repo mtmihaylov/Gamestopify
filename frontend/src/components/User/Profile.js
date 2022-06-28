@@ -12,6 +12,7 @@ import { Spinner, Modal } from "react-bootstrap";
 import {
   clearErrors,
   loadUser,
+  updatePassword,
   updateProfile,
 } from "../../actions/userActions";
 
@@ -25,13 +26,18 @@ function Profile() {
     loading: userLoading,
   } = useSelector((state) => state.user);
 
-  const [userForm, setUserForm] = useState({
+  const [updateProfileForm, setUpdateProfileForm] = useState({
     name: "",
     email: "",
     avatar: "",
   });
-  const { name, email, avatar } = userForm;
+  const { name, email, avatar } = updateProfileForm;
   const [avatarPreview, setAvatarPreview] = useState(user?.avatar?.url || "");
+
+  const [changePasswordForm, setChangePasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
 
   const navigate = useNavigate();
   const alert = useAlert();
@@ -43,7 +49,7 @@ function Profile() {
     }
 
     if (user) {
-      setUserForm({
+      setUpdateProfileForm({
         name: user.name,
         email: user.email,
         avatar: "",
@@ -65,12 +71,17 @@ function Profile() {
     }
   }, [dispatch, alert, error, isUpdated, user, navigate, isAuthenticated]);
 
-  const [show, setShow] = useState(false);
+  const [showUpdateProfileForm, setShowUpdateProfileForm] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleUpdateProfileFormClose = () => setShowUpdateProfileForm(false);
+  const handleUpdateProfileFormShow = () => setShowUpdateProfileForm(true);
 
-  const submitHandler = (e) => {
+  const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
+
+  const handleChangePasswordFormClose = () => setShowChangePasswordForm(false);
+  const handleChangePasswordFormShow = () => setShowChangePasswordForm(true);
+
+  const editProfileSubmitHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -81,21 +92,41 @@ function Profile() {
     dispatch(updateProfile(formData));
   };
 
-  const onChange = (e) => {
+  const changePasswordSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.set("currentPassword", changePasswordForm.currentPassword);
+    formData.set("newPassword", changePasswordForm.newPassword);
+
+    dispatch(updatePassword(formData));
+  };
+
+  const onChangeEditProfile = (e) => {
     if (e.target.name === "avatar") {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
-          setUserForm({ ...userForm, avatar: reader.result });
+          setUpdateProfileForm({ ...updateProfileForm, avatar: reader.result });
         }
       };
 
       reader.readAsDataURL(e.target.files[0]);
     } else {
-      setUserForm({ ...userForm, [e.target.name]: e.target.value });
+      setUpdateProfileForm({
+        ...updateProfileForm,
+        [e.target.name]: e.target.value,
+      });
     }
+  };
+
+  const onChangePasswordUpdate = (e) => {
+    setChangePasswordForm({
+      ...changePasswordForm,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -124,24 +155,25 @@ function Profile() {
                     </Link>
                   </div>
                 </div>
-
                 <button
                   type="button"
                   className="btn btn-primary btn-block mt-5 main-color"
-                  onClick={handleShow}
+                  onClick={handleUpdateProfileFormShow}
                 >
                   Edit Profile
                 </button>
-
-                <Modal show={show} onHide={handleClose}>
+                <Modal
+                  show={showUpdateProfileForm}
+                  onHide={handleUpdateProfileFormClose}
+                >
                   <Modal.Header closeButton>
                     <Modal.Title>Update Profile</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <form
-                      id="userForm"
+                      id="updateProfileForm"
                       encType="multipart/form-data"
-                      onSubmit={submitHandler}
+                      onSubmit={editProfileSubmitHandler}
                     >
                       <div className="form-group">
                         <label htmlFor="name_field">Name</label>
@@ -151,7 +183,7 @@ function Profile() {
                           className="form-control"
                           name="name"
                           value={name}
-                          onChange={onChange}
+                          onChange={onChangeEditProfile}
                         />
                       </div>
 
@@ -163,7 +195,7 @@ function Profile() {
                           className="form-control"
                           name="email"
                           value={email}
-                          onChange={onChange}
+                          onChange={onChangeEditProfile}
                         />
                       </div>
 
@@ -186,7 +218,7 @@ function Profile() {
                               className="custom-file-input"
                               id="customFile"
                               accept="image/*"
-                              onChange={onChange}
+                              onChange={onChangeEditProfile}
                             />
                             <label
                               className="custom-file-label"
@@ -202,7 +234,7 @@ function Profile() {
                   <Modal.Footer>
                     <button
                       type="submit"
-                      form="userForm"
+                      form="updateProfileForm"
                       className="btn btn-primary btn-block"
                     >
                       {userLoading ? (
@@ -213,7 +245,6 @@ function Profile() {
                     </button>
                   </Modal.Footer>
                 </Modal>
-
                 {user.role !== "admin" && (
                   <Link
                     to="/myprofile/orders"
@@ -223,12 +254,66 @@ function Profile() {
                   </Link>
                 )}
 
-                <Link
-                  to="/password/update"
+                <button
+                  type="button"
                   className="btn btn-primary btn-block mt-3 main-color"
+                  onClick={handleChangePasswordFormShow}
                 >
                   Change Password
-                </Link>
+                </button>
+
+                {/* Update Password Modal */}
+                <Modal
+                  show={showChangePasswordForm}
+                  onHide={handleChangePasswordFormClose}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <form
+                      id="updatePasswordForm"
+                      onSubmit={changePasswordSubmitHandler}
+                    >
+                      <div className="form-group">
+                        <label htmlFor="current_password_field">
+                          Current Password
+                        </label>
+                        <input
+                          type="password"
+                          id="current_password_field"
+                          className="form-control"
+                          name="currentPassword"
+                          onChange={onChangePasswordUpdate}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="new_password_field">New Password</label>
+                        <input
+                          type="password"
+                          id="new_password_field"
+                          className="form-control"
+                          name="newPassword"
+                          onChange={onChangePasswordUpdate}
+                        />
+                      </div>
+                    </form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <button
+                      type="submit"
+                      form="updatePasswordForm"
+                      className="btn btn-primary btn-block"
+                    >
+                      {userLoading ? (
+                        <Spinner animation="border" variant="light" />
+                      ) : (
+                        "Save Changes"
+                      )}
+                    </button>
+                  </Modal.Footer>
+                </Modal>
               </div>
 
               <div className="col-12 col-md-5">
