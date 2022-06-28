@@ -14,7 +14,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    avatar: ""
+    avatar: "",
   });
   const { name, email, password, avatar } = user;
   const [avatarPreview, setAvatarPreview] = useState(
@@ -52,22 +52,22 @@ const Register = () => {
     dispatch(register(formData));
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.name === "avatar") {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
-          setUser({ ...user, avatar: reader.result});
+          setUser({ ...user, avatar: reader.result });
         }
-      }
+      };
 
       reader.readAsDataURL(e.target.files[0]);
     } else {
-      setUser({ ...user, [e.target.name]: e.target.value})
+      setUser({ ...user, [e.target.name]: e.target.value });
     }
-  }
+  };
 
   return (
     <>
@@ -76,7 +76,11 @@ const Register = () => {
       <div className="container container-fluid">
         <div className="row wrapper">
           <div className="col-10 col-lg-5">
-            <form className="shadow-lg" onSubmit={submitHandler} encType="multipart/form-data">
+            <form
+              className="shadow-lg"
+              onSubmit={submitHandler}
+              encType="multipart/form-data"
+            >
               <h1 className="mb-3">Register</h1>
 
               <div className="form-group">
@@ -120,7 +124,11 @@ const Register = () => {
                 <div className="d-flex align-items-center">
                   <div>
                     <figure className="avatar mr-3 item-rtl">
-                      <img src={avatarPreview} className="rounded-circle" alt="Avatar Preview" />
+                      <img
+                        src={avatarPreview}
+                        className="rounded-circle"
+                        alt="Avatar Preview"
+                      />
                     </figure>
                   </div>
                   <div className="custom-file">
@@ -145,9 +153,11 @@ const Register = () => {
                 className="btn btn-block py-3"
                 disabled={loading ? true : false}
               >
-               { loading ? (
+                {loading ? (
                   <Spinner animation="border" variant="dark" />
-                ) : ('REGISTER') }
+                ) : (
+                  "REGISTER"
+                )}
               </button>
             </form>
           </div>
