@@ -12,6 +12,9 @@ import Register from "./components/User/Register";
 
 import Profile from "./components/User/Profile";
 
+import ForgotPassword from "./components/User/ForgotPassword";
+import NewPassword from "./components/User/NewPassword";
+
 import { loadUser } from "./actions/userActions";
 import { useDispatch } from "react-redux";
 
@@ -33,6 +36,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/myprofile" element={<Profile />} />
+        <Route path="/password/reset" element={<ForgotPassword />} />
+        <Route path="/password/reset/:token" element={<NewPassword />} />
       </Routes>
       <Footer />
     </div>

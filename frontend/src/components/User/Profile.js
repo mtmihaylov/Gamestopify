@@ -236,6 +236,7 @@ function Profile() {
                       type="submit"
                       form="updateProfileForm"
                       className="btn btn-primary btn-block"
+                      disabled={userLoading ? true : false}
                     >
                       {userLoading ? (
                         <Spinner animation="border" variant="light" />
@@ -305,6 +306,7 @@ function Profile() {
                       type="submit"
                       form="updatePasswordForm"
                       className="btn btn-primary btn-block"
+                      disabled={userLoading ? true : false}
                     >
                       {userLoading ? (
                         <Spinner animation="border" variant="light" />

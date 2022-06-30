@@ -84,9 +84,11 @@ exports.resetPasswordRequest = catchAsyncErrors(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // Create reset password URL
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`; // For testing
+  // Replace Url with below when deploying
+  // const resetUrl = `${req.protocol}://${req.get(
+  //   "host"
+  // )}/api/v1/password/reset/${resetToken}`;
 
   const message = `Your password reset link is:\n\n${resetUrl}\n\nIf you haven't requested a password reset, contact us immediately.`;
 
