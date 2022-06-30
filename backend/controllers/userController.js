@@ -10,11 +10,23 @@ const cloudinary = require("cloudinary");
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
 
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 256,
-    crop: "scale",
-  });
+  let result = "";
+  const defaultAvatarUrl =
+    "https://res.cloudinary.com/best-cloud/image/upload/v1656602684/avatars/avatar-default-circle_fuxz1k.png";
+
+  if (req.body.avatar) {
+    result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 256,
+      crop: "scale",
+    });
+  } else {
+    result = await cloudinary.v2.uploader.upload(defaultAvatarUrl, {
+      folder: "avatars",
+      width: 256,
+      crop: "scale",
+    });
+  }
 
   const user = await User.create({
     name,
