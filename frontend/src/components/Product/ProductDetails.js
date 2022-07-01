@@ -1,9 +1,11 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { getProductDetails, clearErrors } from "../../actions/productsActions";
+import { addToCart } from "../../actions/cartActions";
 
 import { useAlert } from "react-alert";
 
@@ -11,6 +13,8 @@ import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 
 const ProductDetails = () => {
+  const [quantity, setQuantity] = useState(1);
+
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -29,13 +33,31 @@ const ProductDetails = () => {
     }
   }, [dispatch, alert, error, id]);
 
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    if (quantity < product.stock) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(product._id, quantity));
+
+    alert.success("Item added to cart");
+  };
+
   return (
     <div className="container container-fluid">
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={product.name}/>
+          <MetaData title={product.name} />
           <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
               <Carousel pause="hover">
@@ -46,7 +68,7 @@ const ProductDetails = () => {
                         className="d-block w-100 h-100"
                         src={image.url}
                         alt={product.title}
-                        style={{maxHeight: '300px'}}
+                        style={{ maxHeight: "300px" }}
                       />
                     </Carousel.Item>
                   ))}
@@ -74,21 +96,33 @@ const ProductDetails = () => {
               <p id="product_price">${product.price}</p>
 
               <div className="stockCounter d-inline">
-                <span className="btn btn-secondary minus main-color">-</span>
+                <span
+                  className="btn btn-secondary minus main-color"
+                  onClick={decreaseQuantity}
+                >
+                  -
+                </span>
 
                 <input
                   type="number"
                   className="form-control count d-inline"
-                  value="1"
+                  value={quantity}
                   readOnly
                 />
 
-                <span className="btn btn-secondary plus main-color">+</span>
+                <span
+                  className="btn btn-secondary plus main-color"
+                  onClick={increaseQuantity}
+                >
+                  +
+                </span>
               </div>
               <button
                 type="button"
                 id="cart_btn"
                 className="btn btn-primary d-inline ml-4"
+                onClick={addToCartHandler}
+                disabled={product.stock > 0 ? false : true}
               >
                 Add to Cart
               </button>
