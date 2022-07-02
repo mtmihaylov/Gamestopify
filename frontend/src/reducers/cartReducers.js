@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_ITEM } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
@@ -8,11 +8,10 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       const index = state.cartItems.findIndex((i) => i.id === item.id);
 
       if (index >= 0) {
-        let cartItemsCopy = state.cartItems;
-        cartItemsCopy[index] = item;
+        state.cartItems[index] = item;
         return {
           ...state,
-          cartItems: [...cartItemsCopy],
+          cartItems: [...state.cartItems],
         };
       } else {
         return {
@@ -20,6 +19,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: [...state.cartItems, item],
         };
       }
+
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((i) => i.id !== action.payload.id),
+      };
     default:
       return state;
   }

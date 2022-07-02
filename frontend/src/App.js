@@ -12,6 +12,8 @@ import Register from "./components/User/Register";
 
 import Profile from "./components/User/Profile";
 
+import Cart from "./components/Cart/Cart";
+
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
 
@@ -38,6 +40,7 @@ function App() {
         <Route path="/myprofile" element={<Profile />} />
         <Route path="/password/reset" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<NewPassword />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </div>
