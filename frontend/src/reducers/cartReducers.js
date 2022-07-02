@@ -5,14 +5,11 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case ADD_TO_CART:
       const item = action.payload;
 
-      const itemIndex = state.cartItems.findIndex(
-        (i) => i.product === item.product
-      );
+      const index = state.cartItems.findIndex((i) => i.id === item.id);
 
-      if (itemIndex >= 0) {
+      if (index >= 0) {
         let cartItemsCopy = state.cartItems;
-        cartItemsCopy[itemIndex] = item;
-
+        cartItemsCopy[index] = item;
         return {
           ...state,
           cartItems: [...cartItemsCopy],
