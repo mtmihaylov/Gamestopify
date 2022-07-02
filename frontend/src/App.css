@@ -51,18 +51,21 @@ nav {
   padding: 0.4rem 1.8rem;
 }
 
-#cart {
-  font-size: 1rem;
+.cart-icon {
+  font-size: 30px;
   color: white;
 }
 
-#cart_count {
+.cart-badge {
+  position:absolute;
+  top: 0.5px;
+  right: 163px;
   background-color: #febd69;
   padding: 0.2rem 0.5rem;
-  border-radius: 0.2rem;
+  border-radius: 50%;
   color: black;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
 }
 
 /* Home page */

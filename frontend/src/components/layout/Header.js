@@ -35,12 +35,8 @@ const Header = () => {
 
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-right">
           <Link to="/cart" style={{ textDecoration: "none" }}>
-            <span id="cart" className="ml-3">
-              Cart
-            </span>
-            <span className="ml-1" id="cart_count">
-              {cartItems.length}
-            </span>
+            <i className="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
+            <span className="cart-badge">{cartItems.length}</span>
           </Link>
 
           {user ? (
