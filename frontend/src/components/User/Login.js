@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
@@ -11,6 +11,10 @@ import { login, clearErrors } from "../../actions/userActions";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirect = location.search ? location.search.split("=")[1] : "/";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,14 +27,14 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate(`/${redirect}`);
     }
 
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, alert, error, navigate]);
+  }, [dispatch, isAuthenticated, alert, error, navigate, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();

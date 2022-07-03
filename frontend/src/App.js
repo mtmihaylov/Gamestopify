@@ -13,6 +13,7 @@ import Register from "./components/User/Register";
 import Profile from "./components/User/Profile";
 
 import Cart from "./components/Cart/Cart";
+import Shipping from "./components/Cart/Shipping";
 
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
@@ -41,6 +42,7 @@ function App() {
         <Route path="/password/reset" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<NewPassword />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/shipping" element={<Shipping />} />
       </Routes>
       <Footer />
     </div>
