@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import MetaData from "../layout/MetaData";
+import CheckoutSteps from "./CheckoutSteps";
 
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../actions/cartActions";
@@ -43,6 +44,8 @@ const Shipping = () => {
   return (
     <>
       <MetaData title="Shipping Information" />
+
+      <CheckoutSteps shipping />
 
       <div className="row wrapper">
         <div className="col-10 col-md-auto">

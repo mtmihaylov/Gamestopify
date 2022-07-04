@@ -43,7 +43,7 @@ const Cart = () => {
         <h2 className="mt-5 text-center">Your Cart Is Empty</h2>
       ) : (
         <div className="container container-fluid">
-          <h2 className="mt-5">
+          <h2 className="mt-5 text-center">
             Your Cart: <b>{cartItems.length}</b>
           </h2>
 
