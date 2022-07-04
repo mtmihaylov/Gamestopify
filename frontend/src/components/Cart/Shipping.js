@@ -38,7 +38,7 @@ const Shipping = () => {
       saveShippingInfo({ address, city, postCode, phoneNumber, country })
     );
 
-    navigate("/confirm");
+    navigate("/order/confirm");
   };
 
   return (
