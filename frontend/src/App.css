@@ -52,13 +52,15 @@ nav {
 }
 
 .cart-icon {
+  position: relative;
   font-size: 30px;
   color: white;
+  top: 8px;
 }
 
 .cart-badge {
   position:absolute;
-  top: 0.5px;
+  top: 2px;
   right: 163px;
   background-color: #febd69;
   padding: 0.2rem 0.5rem;
