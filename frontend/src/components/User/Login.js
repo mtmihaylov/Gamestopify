@@ -27,7 +27,7 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(`/${redirect}`);
+      navigate(redirect);
     }
 
     if (error) {
