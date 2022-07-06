@@ -68,9 +68,15 @@ const Payment = () => {
                 <div className="form-group">
                   <label htmlFor="card_cvc_field">CVC</label>
                   <i
-                    className="fa fa-question-circle ml-2 text-secondary"
+                    className="fa fa-question-circle ml-2 text-secondary tooltip pt-1"
                     aria-hidden="true"
                   ></i>
+                  <span className="tooltip-content">
+                    <img
+                      src="https://res.cloudinary.com/best-cloud/image/upload/v1657142871/cvv_1_fxky5t.png"
+                      alt="cvv"
+                    />
+                  </span>
                   <CardCvcElement
                     type="text"
                     id="card_cvc_field"
