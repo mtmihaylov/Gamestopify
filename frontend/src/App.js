@@ -15,6 +15,7 @@ import Profile from "./components/User/Profile";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import Payment from "./components/Cart/Payment";
 
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
@@ -25,6 +26,9 @@ import { useDispatch } from "react-redux";
 import "./App.css";
 
 import axios from "axios";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -57,6 +61,16 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/order/confirm" element={<ConfirmOrder />} />
+        {stripeApiKey && (
+          <Route
+            path="/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <Payment />
+              </Elements>
+            }
+          />
+        )}
       </Routes>
       <Footer />
     </div>
