@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/layout/Header";
@@ -24,10 +24,22 @@ import { useDispatch } from "react-redux";
 
 import "./App.css";
 
+import axios from "axios";
+
 function App() {
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(loadUser());
+
+    async function getStripeApiKey() {
+      const { data } = await axios.get("/api/v1/stripe");
+      setStripeApiKey(data.apiKey);
+    }
+
+    getStripeApiKey();
   }, [dispatch]);
 
   return (
