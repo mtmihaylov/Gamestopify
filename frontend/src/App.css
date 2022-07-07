@@ -58,16 +58,18 @@ nav {
   top: 8px;
 }
 
-.cart-badge {
-  position:absolute;
-  top: 2px;
-  right: 163px;
+.cart-icon:after {
+  content:attr(value);
+  position:relative;
+  top:-15px; 
+  left:-5px;
   background-color: #febd69;
-  padding: 0.2rem 0.5rem;
-  border-radius: 50%;
+  border-radius:50%;
+  padding: 0.15rem 0.4rem;
   color: black;
   font-weight: bold;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
+  font-family: 'Amazon Ember';
 }
 
 /* Home page */
@@ -576,7 +578,7 @@ input[type="number"]::-webkit-inner-spin-button {
   display:none;
   -moz-border-radius:6px;
   -webkit-border-radius:6px;
-  border-radius:6px;
+  border-radius:20px;
   color:black;
   background:white; 
   position:absolute;
@@ -595,7 +597,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border:1px solid black;
   margin-top:12px;
   margin-left:32px;
-  padding: 5px;
+  padding: 3px;
 }
 
 #pay_btn {
