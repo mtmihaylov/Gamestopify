@@ -15,6 +15,8 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 
+import axios from "axios";
+
 const Payment = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -25,7 +27,68 @@ const Payment = () => {
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
 
+  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+
+  const paymentData = {
+    amount: Math.round(orderInfo.total * 100), // Аmount in cents for Stripe
+  };
+
+  const [disabled, setDisabled] = useState(false);
+
   useEffect(() => {}, []);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      let res = await axios.post(
+        "/api/v1/payment/process",
+        paymentData,
+        config
+      );
+
+      const clientSecret = res.data.client_secret;
+
+      if (!stripe || !elements) {
+        return;
+      }
+
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: user.name,
+            email: user.email,
+          },
+        },
+      });
+
+      if (result.error) {
+        alert.error(result.error);
+        setDisabled(false);
+      } else {
+        // If the paymenet is processed or not
+        if (result.paymentIntent.status === "succeeded") {
+          // TODO: Create order
+
+          navigate("/success");
+        } else {
+          alert.error(
+            "There was an issue processing your payment, please try again"
+          );
+        }
+      }
+    } catch (error) {
+      setDisabled(false);
+      alert.error(error);
+    }
+  };
 
   return (
     <>
@@ -35,7 +98,7 @@ const Payment = () => {
 
       <div className="row wrapper">
         <div className="col-10 col-md-4">
-          <form className="shadow-lg">
+          <form className="shadow-lg" onSubmit={submitHandler}>
             <h1 className="mb-4 text-center">Card Details</h1>
             <div className="text-center mb-5">
               <img
@@ -86,8 +149,13 @@ const Payment = () => {
               </div>
             </div>
 
-            <button id="pay_btn" type="submit" className="btn btn-block py-2">
-              Pay
+            <button
+              id="pay_btn"
+              type="submit"
+              className="btn btn-block py-2"
+              disabled={disabled}
+            >
+              Pay ${orderInfo.total}
             </button>
           </form>
         </div>
