@@ -70,11 +70,11 @@ const Header = () => {
                   Profile
                 </Link>
 
-                {user.role !== "admin" ? (
-                  <Link to="/myprofile/orders" className="dropdown-item">
-                    Orders
-                  </Link>
-                ) : (
+                <Link to="/myprofile/orders" className="dropdown-item">
+                  Orders
+                </Link>
+
+                {user.role === "admin" && (
                   <Link to="/dashboard" className="dropdown-item">
                     Dashboard
                   </Link>

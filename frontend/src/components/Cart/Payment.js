@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 
-import { createOrder, clearErrors } from "../../actions/productActions";
+import { createOrder, clearErrors } from "../../actions/orderActions";
 
 import {
   useStripe,
