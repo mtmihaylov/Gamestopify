@@ -40,6 +40,8 @@ const Payment = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    setDisabled(true);
+
     try {
       const config = {
         headers: {

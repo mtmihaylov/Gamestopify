@@ -61,8 +61,8 @@ nav {
 .cart-icon:after {
   content:attr(value);
   position:relative;
-  top:-15px; 
-  left:-5px;
+  top: -18px; 
+  left:-8px;
   background-color: #febd69;
   border-radius:50%;
   padding: 0.15rem 0.4rem;
