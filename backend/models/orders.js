@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   shippingInfo: {
@@ -13,7 +13,6 @@ const orderSchema = new mongoose.Schema({
     address: {
       type: String,
       required: true,
-
     },
     postCode: {
       type: String,
@@ -21,75 +20,77 @@ const orderSchema = new mongoose.Schema({
     },
     phoneNumber: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   user: {
     type: mongoose.Schema.ObjectId,
     required: true,
-    ref: 'User'
+    ref: "User",
   },
-  orderItems: [{
-    product: {
-      type: mongoose.Schema.ObjectId,
-      required: true,
-      ref: 'Product'
+  orderItems: [
+    {
+      product: {
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: "Product",
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: true,
+      },
     },
-    name: {
-      type: String,
-      required: true
-    },
-    price: {
-      type: Number,
-      required: true
-    },
-    quantity: {
-      type: Number,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    }
-  }],
+  ],
   paymentInfo: {
     id: {
-      type: String
+      type: String,
     },
     status: {
-      type: String
-    }
+      type: String,
+    },
   },
   paymentDate: {
-    type: Date
+    type: Date,
   },
   itemsPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
   },
   taxPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
   },
   shippingPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
   },
   orderStatus: {
     type: String,
     required: true,
-    default: 'Processing'
+    default: "Processing",
   },
   deliveryDate: {
-    type: Date
+    type: Date,
   },
   orderDate: {
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model("Order", orderSchema);
