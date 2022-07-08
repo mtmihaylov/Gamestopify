@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 
+import { createOrder, clearErrors } from "../../actions/productActions";
+
 import {
   useStripe,
   useElements,
@@ -26,6 +28,16 @@ const Payment = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const { error } = useSelector((state) => state.newOrder);
+
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [alert, error, dispatch]);
 
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
@@ -33,9 +45,17 @@ const Payment = () => {
     amount: Math.round(orderInfo.total * 100), // Аmount in cents for Stripe
   };
 
-  const [disabled, setDisabled] = useState(false);
+  const order = {
+    orderItems: cartItems,
+    shippingInfo,
+  };
 
-  useEffect(() => {}, []);
+  if (orderInfo) {
+    order.itemsPrice = orderInfo.subtotal;
+    order.taxPrice = orderInfo.tax;
+    order.shippingPrice = orderInfo.shippingPrice;
+    order.totalPrice = orderInfo.total;
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -77,7 +97,14 @@ const Payment = () => {
       } else {
         // If the paymenet is processed or not
         if (result.paymentIntent.status === "succeeded") {
-          // TODO: Create order
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+          console.log(order);
+
+          dispatch(createOrder(order));
 
           navigate("/success");
         } else {
