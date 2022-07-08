@@ -16,6 +16,7 @@ import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Payment from "./components/Cart/Payment";
+import OrderSuccess from "./components/Cart/OrderSuccess";
 
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
@@ -71,6 +72,7 @@ function App() {
             }
           />
         )}
+        <Route path="/success" element={<OrderSuccess />} />
       </Routes>
       <Footer />
     </div>
