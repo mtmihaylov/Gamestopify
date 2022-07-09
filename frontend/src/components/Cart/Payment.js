@@ -158,7 +158,7 @@ const Payment = () => {
                 <div className="form-group">
                   <label htmlFor="card_cvc_field">CVC</label>
                   <i
-                    className="fa fa-question-circle ml-2 text-secondary tooltip pt-1"
+                    className="fa fa-question-circle ml-2 text-secondary tooltipp pt-1"
                     aria-hidden="true"
                   ></i>
                   <span className="tooltip-content">
