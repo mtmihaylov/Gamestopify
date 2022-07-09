@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 
 import Loader from "../layout/Loader";
