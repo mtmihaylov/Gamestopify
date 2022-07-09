@@ -12,6 +12,7 @@ import Register from "./components/User/Register";
 
 import Profile from "./components/User/Profile";
 import ListOrders from "./components/Order/ListOrders";
+import OrderDetails from "./components/Order/OrderDetails";
 
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
@@ -75,6 +76,7 @@ function App() {
         )}
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/myprofile/orders" element={<ListOrders />} />
+        <Route path="/order/:id" element={<OrderDetails />} />
       </Routes>
       <Footer />
     </div>

@@ -67,7 +67,7 @@ const ListOrders = () => {
       data.rows.push({
         id: order._id,
         numOfItems: order.orderItems.length,
-        amount: `$${order.totalPrice}`,
+        amount: `$${order.totalPrice.toFixed(2)}`,
         status: String(order.orderStatus).includes("Delivered") ? (
           <p className="greenColor">{order.orderStatus}</p>
         ) : (
@@ -100,7 +100,7 @@ const ListOrders = () => {
             bordered
             striped
             hover
-          ></MDBDataTable>
+          />
         )}
       </div>
     </>
