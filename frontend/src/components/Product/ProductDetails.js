@@ -18,6 +18,8 @@ import { useAlert } from "react-alert";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 
+import ReviewList from "../Review/ReviewList";
+
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
@@ -284,6 +286,8 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+
+          {product.reviews && <ReviewList reviews={product.reviews} />}
         </Fragment>
       )}
     </div>

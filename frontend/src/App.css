@@ -749,6 +749,10 @@ ul.CTAs a {
 }
 
 .review_user {
-  font-size: 0.8rem;
   color: grey;
+  margin: 0
+}
+
+.review_comment {
+  overflow-wrap: break-word;
 }

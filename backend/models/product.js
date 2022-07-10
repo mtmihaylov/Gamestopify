@@ -52,10 +52,10 @@ const productSchema = new mongoose.Schema({
         "Sports",
         "Toys",
         "Books",
-        "Food"
+        "Food",
       ],
       message: "Please select correct category for product",
-    }
+    },
   },
   seller: {
     type: String,
@@ -75,8 +75,12 @@ const productSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: true
+        ref: "User",
+        required: true,
+      },
+      avatar: {
+        type: String,
+        required: true,
       },
       name: {
         type: String,
@@ -94,16 +98,16 @@ const productSchema = new mongoose.Schema({
   ],
   createAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   user: {
     type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true
-  }
+    ref: "User",
+    required: true,
+  },
 });
 
 module.exports = {
   Product: mongoose.model("Product", productSchema),
-  productSchema
+  productSchema,
 };
