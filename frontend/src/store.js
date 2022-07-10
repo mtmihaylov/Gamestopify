@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import {
   productsReducer,
   productDetailsReducer,
+  reviewReducer,
 } from "./reducers/productReducers";
 import {
   authReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
+  newReview: reviewReducer,
 });
 
 let initialState = {

@@ -4,8 +4,14 @@ import { Carousel } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProductDetails, clearErrors } from "../../actions/productsActions";
+import {
+  getProductDetails,
+  clearErrors,
+  newReview,
+} from "../../actions/productsActions";
 import { addToCart } from "../../actions/cartActions";
+
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 import { useAlert } from "react-alert";
 
@@ -22,6 +28,17 @@ const ProductDetails = () => {
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { error: reviewError, success } = useSelector(
+    (state) => state.newReview
+  );
+
+  // Variables for the stars in the review
+  const [ratingValue, setRatingValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(0);
+  const stars = Array(5).fill(0);
+
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     dispatch(getProductDetails(id));
@@ -31,7 +48,18 @@ const ProductDetails = () => {
 
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, id]);
+
+    if (reviewError) {
+      alert.error(reviewError);
+
+      dispatch(clearErrors());
+    }
+
+    if (success) {
+      alert.success("Review posted successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
+  }, [dispatch, alert, error, id, reviewError, success]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -49,6 +77,29 @@ const ProductDetails = () => {
     dispatch(addToCart(product._id, quantity));
 
     alert.success("Item added to cart");
+  };
+
+  // 3 Functions for handling the star review coloring
+  const handleClick = (value) => {
+    setRatingValue(value);
+  };
+
+  const handleMouseOver = (value) => {
+    setHoverValue(value);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined);
+  };
+
+  const reviewHandler = () => {
+    const formData = new FormData();
+
+    formData.set("rating", ratingValue);
+    formData.set("comment", comment);
+    formData.set("productId", id);
+
+    dispatch(newReview(formData));
   };
 
   return (
@@ -150,15 +201,21 @@ const ProductDetails = () => {
               </p>
 
               {/* <!-- Button trigger modal --> */}
-              <button
-                id="review_btn"
-                type="button"
-                className="btn btn-primary"
-                data-toggle="modal"
-                data-target="#ratingModal"
-              >
-                Write a customer review
-              </button>
+              {isAuthenticated ? (
+                <button
+                  id="review_btn"
+                  type="button"
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#ratingModal"
+                >
+                  Write a customer review
+                </button>
+              ) : (
+                <div className="alert alert-danger mt-5 text-center">
+                  Login to post your review
+                </div>
+              )}
 
               {/* <!-- Modal --> */}
               <div
@@ -170,13 +227,16 @@ const ProductDetails = () => {
               >
                 <div className="modal-dialog">
                   <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="ratingModalLabel">
-                        Submit Review
+                    <div className="modal-header text-center">
+                      <h5
+                        className="modal-title w-100 pl-4"
+                        id="ratingModalLabel"
+                      >
+                        Submit a Review
                       </h5>
                       <button
                         type="button"
-                        class="close"
+                        className="close"
                         data-dismiss="modal"
                         aria-label="Close"
                       >
@@ -184,41 +244,37 @@ const ProductDetails = () => {
                       </button>
                     </div>
                     <div className="modal-body">
-                      <ul className="stars">
-                        <li className="star">
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li className="star">
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li className="star">
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li className="star">
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li className="star">
-                          <i className="fa fa-star"></i>
-                        </li>
-                      </ul>
+                      <div className="stars">
+                        {stars.map((_, index) => (
+                          <i
+                            className={`fa fa-star star ${
+                              (hoverValue || ratingValue) > index
+                                ? "yellow"
+                                : ""
+                            }`}
+                            key={index}
+                            onClick={() => handleClick(index + 1)}
+                            onMouseOver={() => handleMouseOver(index + 1)}
+                            onMouseLeave={handleMouseLeave}
+                          ></i>
+                        ))}
+                      </div>
 
                       <textarea
                         name="review"
                         id="review"
                         className="form-control mt-3"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>
                     <div className="modal-footer">
                       <button
                         type="button"
-                        className="btn btn-secondary rounded-pill px-4"
+                        className="btn btn-primary my-1 float-right px-4 text-white w-100"
+                        onClick={reviewHandler}
                         data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        className="btn my-1 float-right review-btn px-4 text-white"
+                        aria-label="Close"
                       >
                         Submit
                       </button>

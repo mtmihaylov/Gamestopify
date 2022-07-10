@@ -724,15 +724,16 @@ ul.CTAs a {
 .stars {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 0;
 }
 
 .star {
   display: inline;
-  list-style: none;
   font-size: 3rem;
   padding-left: 0.9rem;
   color: #e3e3e3;
+  cursor: pointer;
 }
 
 .star:first-child {
