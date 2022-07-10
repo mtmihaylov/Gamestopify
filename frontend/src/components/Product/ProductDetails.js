@@ -176,10 +176,12 @@ const ProductDetails = () => {
                       </h5>
                       <button
                         type="button"
-                        className="btn fa fa-times fa-lg pr-0"
-                        data-bs-dismiss="modal"
+                        class="close"
+                        data-dismiss="modal"
                         aria-label="Close"
-                      ></button>
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
                     <div className="modal-body">
                       <ul className="stars">
@@ -210,7 +212,7 @@ const ProductDetails = () => {
                       <button
                         type="button"
                         className="btn btn-secondary rounded-pill px-4"
-                        data-bs-dismiss="modal"
+                        data-dismiss="modal"
                       >
                         Close
                       </button>
