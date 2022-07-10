@@ -1,12 +1,12 @@
 const { Product, productSchema } = require("../models/product");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
-const APIFeatures = require('../utils/apiFeatures');
+const APIFeatures = require("../utils/apiFeatures");
 
 // Create new product => api/v1/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
   req.body.user = req.user.id;
-  
+
   const product = await Product.create(req.body);
 
   res.status(201).json({
@@ -19,12 +19,12 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   const productsPerPage = 4;
   const allProductsCount = await Product.countDocuments();
-  const categories = productSchema.path('category').enumValues;
+  const categories = productSchema.path("category").enumValues;
 
   const apiFeatures = new APIFeatures(Product.find(), req.query)
-                      .search()
-                      .filter()
-                      //.pagination(productsPerPage);
+    .search()
+    .filter();
+  //.pagination(productsPerPage);
 
   let products = await apiFeatures.query;
   const filteredProductsCount = products.length;
@@ -38,7 +38,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     products,
     productsPerPage,
     categories,
-    filteredProductsCount
+    filteredProductsCount,
   });
 });
 
@@ -88,8 +88,8 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-// Create / Update review on api/v1/review 
-exports.createReview = catchAsyncErrors( async( req, res, next) => {
+// Create / Update review on api/v1/review
+exports.createReview = catchAsyncErrors(async (req, res, next) => {
   // TODO: Make it with req.query.id?
   const { rating, comment, productId } = req.body;
 
@@ -97,67 +97,77 @@ exports.createReview = catchAsyncErrors( async( req, res, next) => {
     user: req.user._id,
     name: req.user.name,
     rating: Number(rating),
-    comment
-  }
+    comment,
+  };
 
   const product = await Product.findById(productId);
 
-  const isReviewed = product.reviews.find(r => {
-    r.user.toString() === req.user._id.toString()
-  })
+  const isReviewed = product.reviews.find((r) => {
+    return r.user.toString() === req.user._id.toString();
+  });
 
   if (isReviewed) {
-    product.reviews.forEach(r => {
+    product.reviews.forEach((r) => {
       if (r.user.toString() === req.user._id.toString()) {
-        review.comment = comment;
-        review.rating = rating;
+        r.comment = comment;
+        r.rating = rating;
       }
-    })
+    });
   } else {
     product.reviews.push(review);
     product.numberOfReviews = product.reviews.length;
   }
 
-  product.ratings = product.reviews.reduce((acc, review) => review.rating + acc, 0) / product.reviews.length
+  product.ratings =
+    product.reviews.reduce((acc, review) => review.rating + acc, 0) /
+    product.reviews.length;
 
   product.save({ validateBeforeSave: false });
 
   res.status(200).json({
-    success: true
-  })
-})
+    success: true,
+  });
+});
 
 // Get product reviews on api/v1/reviews
-exports.getReviews = catchAsyncErrors( async( req, res, next) => {
+exports.getReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
 
   res.status(200).json({
     success: true,
-    reviews: product.reviews
-  })
-})
+    reviews: product.reviews,
+  });
+});
 
 // Delete product review on api/v1/reviews
-exports.deleteReview = catchAsyncErrors( async( req, res, next ) => {
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
-  const reviews = product.reviews.filter(r => r._id.toString() !== req.query.reviewId.toString());
+  const reviews = product.reviews.filter(
+    (r) => r._id.toString() !== req.query.reviewId.toString()
+  );
 
   const numberOfReviews = reviews.length;
 
-  const ratings = product.reviews.reduce((acc, review) => review.rating + acc, 0) / reviews.length;
+  const ratings =
+    product.reviews.reduce((acc, review) => review.rating + acc, 0) /
+    reviews.length;
 
-  await Product.findByIdAndUpdate(req.query.productId, {
-    reviews,
-    ratings,
-    numberOfReviews
-  }, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false
-  })
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      ratings,
+      numberOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
 
   res.status(200).json({
-    success: true
-  })
-})
+    success: true,
+  });
+});
