@@ -77,12 +77,12 @@ nav {
   margin-top: 1.8rem;
 }
 
-.card {
+.product-card {
   height: 100%;
   transition: all .2s ease-in-out;
 }
 
-.card:hover {
+.product-card:hover {
   transform: scale(1.07); 
 }
 
@@ -386,7 +386,7 @@ input[type="number"]::-webkit-inner-spin-button {
   color: grey;
 }
 
-/* Avatar */
+/* Avatar in user profile*/
 .avatar {
   display: inline-block;
   margin-bottom: 0;
@@ -457,6 +457,21 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-right: 0.6rem;
   height: 2.2rem;
   width: 2.2rem;
+}
+
+/* Nav dropdown menu animation */
+.dropdown-menu {
+  display: block;
+  visibility: hidden;
+  opacity:0;
+  transition:.35s ease all;
+}
+
+.dropdown-menu.show {
+  display: block;
+  visibility: visible;
+  opacity:1;
+  transition:.35s ease all;
 }
 
 /* Checkout Steps */
@@ -633,6 +648,7 @@ input[type="number"]::-webkit-inner-spin-button {
   top: 0;
   z-index: 10;
 }
+
 #sidebar {
   min-width: 100%;
   max-width: 100%;
@@ -648,6 +664,7 @@ input[type="number"]::-webkit-inner-spin-button {
   padding: 20px;
   background: #232f3e;
 }
+
 #sidebar ul.components {
   padding: 5px 0px;
   border-bottom: 1px solid #232f3e;
@@ -674,15 +691,22 @@ a[aria-expanded='true'] {
   color: #fff;
   background: #232f3e;
 }
+
 a[data-toggle='collapse'] {
   position: relative;
 }
+
 .dropdown-toggle::after {
   display: block;
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 20px;
-  transform: translateY(-50%);
+  transition: 0.5s;
+}
+
+#sidebar ul li.active > a,
+a[aria-expanded='true']::after {
+  transform: rotate(180deg);
 }
 
 ul ul a {
