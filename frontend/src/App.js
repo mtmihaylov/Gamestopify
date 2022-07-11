@@ -23,6 +23,9 @@ import OrderSuccess from "./components/Cart/OrderSuccess";
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
 
+// Admin routes
+import Dashboard from "./components/admin/Dashboard";
+
 import { loadUser } from "./actions/userActions";
 import { useDispatch } from "react-redux";
 
@@ -77,6 +80,7 @@ function App() {
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/myprofile/orders" element={<ListOrders />} />
         <Route path="/order/:id" element={<OrderDetails />} />
+        <Route path="/dashboard" isAdmin={true} element={<Dashboard />} />
       </Routes>
       <Footer />
     </div>
