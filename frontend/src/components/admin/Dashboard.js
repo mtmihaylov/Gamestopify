@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 
-// import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar";
 
 const Dashboard = ({ isAdmin }) => {
   const navigate = useNavigate();
@@ -21,9 +21,9 @@ const Dashboard = ({ isAdmin }) => {
       <MetaData title="Admin Dashboard" />
 
       <div className="row">
-        {/* <div className="col-12 col-md-2">
+        <div className="col-12 col-md-2">
           <Sidebar></Sidebar>
-        </div> */}
+        </div>
 
         <div className="col-12 col-md-10">
           <h1 className="my-4 text-center">Dashboard</h1>
