@@ -7,14 +7,30 @@ import MetaData from "../layout/MetaData";
 
 import Sidebar from "./Sidebar";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { getAdminProducts } from "../../actions/productsActions";
+
 const Dashboard = ({ isAdmin }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (!isAdmin) {
-  //     navigate("/");
-  //   }
-  // }, [navigate, isAdmin]);
+  const { products } = useSelector((state) => state.products);
+
+  let outOfStockProductsCount = 0;
+  products.forEach((p) => {
+    if (p.stock === 0) {
+      outOfStockProductsCount++;
+    }
+  });
+
+  useEffect(() => {
+    // if (!isAdmin) {
+    //   navigate("/");
+    // }
+
+    dispatch(getAdminProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -46,7 +62,7 @@ const Dashboard = ({ isAdmin }) => {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Products
-                    <br /> <b>0</b>
+                    <br /> <b>{products?.length}</b>
                   </div>
                 </div>
                 <Link
@@ -106,7 +122,7 @@ const Dashboard = ({ isAdmin }) => {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Out of Stock
-                    <br /> <b>0</b>
+                    <br /> <b>{outOfStockProductsCount}</b>
                   </div>
                 </div>
                 <Link
