@@ -110,7 +110,15 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 // Delete product on /api/v1/admin/product/:id
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
+    const product = await Product.findById(req.params.id);
+
+    // Delete product images in cloudinary
+    for (const image of product.images) {
+      const result = await cloudinary.v2.uploader.destroy(image.public_id);
+    }
+
+    // Delete product
+    await product.remove();
 
     res.status(200).json({
       success: true,
