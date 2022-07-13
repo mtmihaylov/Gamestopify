@@ -9,7 +9,12 @@ import Sidebar from "./Sidebar";
 
 import { MDBDataTable } from "mdbreact";
 
-import { getAdminProducts, clearErrors } from "../../actions/productsActions";
+import {
+  getAdminProducts,
+  clearErrors,
+  deleteProduct,
+} from "../../actions/productsActions";
+import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductsList = () => {
   const alert = useAlert();
@@ -18,6 +23,9 @@ const ProductsList = () => {
 
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { loading, products, error } = useSelector((state) => state.products);
+  const { error: deleteProductError, success } = useSelector(
+    (state) => state.product
+  );
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -30,7 +38,26 @@ const ProductsList = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, navigate, error, alert]);
+
+    if (deleteProductError) {
+      alert.error(deleteProductError);
+      dispatch(clearErrors());
+    }
+
+    if (success) {
+      alert.success("Product deleted successfully");
+      navigate("/admin/products");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
+  }, [
+    dispatch,
+    isAuthenticated,
+    navigate,
+    error,
+    alert,
+    deleteProductError,
+    success,
+  ]);
 
   const setProducts = () => {
     const data = {
@@ -78,7 +105,10 @@ const ProductsList = () => {
               <i className="fa fa-pencil mr-1"></i>
               <span>Edit</span>
             </Link>
-            <button className="btn btn-danger ml-3">
+            <button
+              className="btn btn-danger ml-3"
+              onClick={() => deleteHandler(product._id)}
+            >
               <i className="fa fa-times-circle mr-1"></i>
               <span>Delete</span>
             </button>
@@ -88,6 +118,10 @@ const ProductsList = () => {
     });
 
     return data;
+  };
+
+  const deleteHandler = (id) => {
+    dispatch(deleteProduct(id));
   };
 
   return (

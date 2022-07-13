@@ -90,7 +90,7 @@ function App() {
         />
         <Route path="/admin/product" isAdmin={true} element={<NewProduct />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
