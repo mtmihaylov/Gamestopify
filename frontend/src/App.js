@@ -26,6 +26,7 @@ import NewPassword from "./components/User/NewPassword";
 // Admin routes
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductsList";
+import NewProduct from "./components/admin/NewProduct";
 
 import { loadUser } from "./actions/userActions";
 import { useDispatch } from "react-redux";
@@ -87,6 +88,7 @@ function App() {
           isAdmin={true}
           element={<ProductsList />}
         />
+        <Route path="/admin/product" isAdmin={true} element={<NewProduct />} />
       </Routes>
       <Footer />
     </div>
