@@ -21,7 +21,7 @@ const NewProduct = () => {
     name: "",
     price: "",
     description: "",
-    category: "",
+    category: "Electronics",
     seller: "",
     stock: "",
   });
@@ -79,20 +79,12 @@ const NewProduct = () => {
       formData.append("images", image);
     });
 
-    console.log(images);
-    console.log(images.length);
-
-    for (const value of formData.entries()) {
-      console.log(typeof value[1]);
-    }
     dispatch(newProduct(formData));
   };
 
   const onChange = (e) => {
     if (e.target.name === "images") {
       const files = Array.from(e.target.files);
-
-      console.log(files);
 
       setImagesPreview([]);
       setImages([]);
@@ -109,7 +101,6 @@ const NewProduct = () => {
         reader.readAsDataURL(file);
       });
     } else {
-      console.log("images?");
       setProductForm({ ...productForm, [e.target.name]: e.target.value });
     }
   };
