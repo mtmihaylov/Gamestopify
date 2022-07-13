@@ -75,10 +75,12 @@ const ProductsList = () => {
               to={`/admin/product/${product._id}`}
               className="btn btn-primary"
             >
-              <i className="fa fa-pencil"></i>
+              <i className="fa fa-pencil mr-1"></i>
+              <span>Edit</span>
             </Link>
-            <button className="btn btn-danger ml-1">
-              <i className="fa fa-times-circle"></i>
+            <button className="btn btn-danger ml-3">
+              <i className="fa fa-times-circle mr-1"></i>
+              <span>Delete</span>
             </button>
           </>
         ),

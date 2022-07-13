@@ -780,3 +780,11 @@ ul.CTAs a {
 .review_comment {
   overflow-wrap: break-word;
 }
+
+.table td {
+  vertical-align: middle;
+}
+
+.table td:nth-child(5) {
+  text-align: center;
+}
