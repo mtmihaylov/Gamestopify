@@ -92,7 +92,39 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
 // Update product details on /api/v1/product/:id
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   try {
-    let product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    let product = await Product.findById(req.params.id);
+
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+      images.push(req.body.images);
+    } else {
+      images = req.body.images;
+    }
+
+    if (images !== undefined) {
+      // Delete product images in cloudinary
+      for (const image of product.images) {
+        const result = await cloudinary.v2.uploader.destroy(image.public_id);
+      }
+
+      let imagesObjects = [];
+
+      for (const image of images) {
+        const result = await cloudinary.v2.uploader.upload(image, {
+          folder: "products",
+        });
+
+        imagesObjects.push({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
+      }
+
+      req.body.images = imagesObjects;
+    }
+
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
       useFindAndModify: false,
