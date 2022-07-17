@@ -7,7 +7,8 @@ import {
   productDetailsReducer,
   reviewReducer,
   newProductReducer,
-  productReducer,
+  editProductReducer,
+  deleteProductReducer,
 } from "./reducers/productReducers";
 import {
   authReducer,
@@ -24,7 +25,8 @@ import {
 const rootReducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
-  product: productReducer,
+  editProduct: editProductReducer,
+  deleteProduct: deleteProductReducer,
   auth: authReducer,
   user: userReducer,
   forgotPassword: forgotPasswordReducer,
