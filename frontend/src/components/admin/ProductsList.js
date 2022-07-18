@@ -256,7 +256,7 @@ const ProductsList = () => {
           <Sidebar></Sidebar>
         </div>
 
-        <div className="col-12 col-md-10">
+        <div className="col-12 col-md-10 pl-0">
           <h1 className="my-4 text-center">All Products</h1>
 
           {loading ? (
