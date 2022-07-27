@@ -11,6 +11,10 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
+  PROCESS_ORDER_REQUEST,
+  PROCESS_ORDER_SUCCESS,
+  PROCESS_ORDER_FAIL,
+  PROCESS_ORDER_RESET,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 
@@ -84,6 +88,39 @@ export const orderDetailsReducer = (state = { order: {} }, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const processOrderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROCESS_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PROCESS_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload,
+      };
+    case PROCESS_ORDER_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case PROCESS_ORDER_RESET:
+      return {
+        ...state,
+        loading: false,
       };
     case CLEAR_ERRORS:
       return {

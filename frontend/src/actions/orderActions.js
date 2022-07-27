@@ -13,6 +13,9 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
+  PROCESS_ORDER_REQUEST,
+  PROCESS_ORDER_SUCCESS,
+  PROCESS_ORDER_FAIL,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 
@@ -92,6 +95,35 @@ export const getOrderDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Process order (change order status)
+export const processOrder = (id, orderData) => async (dispatch) => {
+  try {
+    dispatch({ type: PROCESS_ORDER_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/order/${id}`,
+      orderData,
+      config
+    );
+
+    dispatch({
+      type: PROCESS_ORDER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: PROCESS_ORDER_FAIL,
       payload: error.response.data.message,
     });
   }
