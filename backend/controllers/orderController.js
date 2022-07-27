@@ -63,7 +63,7 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
 // Get all orders in database on api/v1/admin/orders - FOR ADMINS
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find();
+  const orders = await Order.find().populate("user", "name");
 
   let totalAmount = 0;
 
