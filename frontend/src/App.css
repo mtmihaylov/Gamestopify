@@ -573,6 +573,10 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-left: 1.5rem;
 }
 
+.order-status {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+}
+
 .update-btn {
   background-color: #fa9c23;
   border-color: #fa9c23;
