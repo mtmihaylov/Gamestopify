@@ -14,9 +14,13 @@ import { MDBDataTable } from "mdbreact";
 import {
   getAllOrders,
   processOrder,
+  deleteOrder,
   clearErrors,
 } from "../../actions/orderActions";
-import { PROCESS_ORDER_RESET } from "../../constants/orderConstants";
+import {
+  PROCESS_ORDER_RESET,
+  DELETE_ORDER_RESET,
+} from "../../constants/orderConstants";
 
 function OrdersList() {
   const alert = useAlert();
@@ -30,6 +34,12 @@ function OrdersList() {
     success: processSuccess,
     error: processError,
   } = useSelector((state) => state.processOrder);
+
+  const {
+    loading: deleteLoading,
+    success: deleteSuccess,
+    error: deleteError,
+  } = useSelector((state) => state.deleteOrder);
 
   const [orderForm, setOrderForm] = useState({
     id: "",
@@ -61,12 +71,33 @@ function OrdersList() {
       dispatch(clearErrors());
     }
 
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch({ type: DELETE_ORDER_RESET });
+      dispatch(clearErrors());
+    }
+
     if (processSuccess) {
       alert.success("Order updated successfully");
       navigate("/admin/orders");
       dispatch({ type: PROCESS_ORDER_RESET });
     }
-  }, [dispatch, alert, error, processError, processSuccess, navigate]);
+
+    if (deleteSuccess) {
+      alert.success("Order deleted successfully");
+      navigate("/admin/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
+    }
+  }, [
+    dispatch,
+    alert,
+    error,
+    processError,
+    processSuccess,
+    deleteError,
+    deleteSuccess,
+    navigate,
+  ]);
 
   const [show, setShow] = useState(false);
 
@@ -100,6 +131,10 @@ function OrdersList() {
     dispatch(processOrder(orderForm.id, { orderStatus })).then((res) => {
       handleClose();
     });
+  };
+
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
 
   const setOrders = () => {
@@ -154,7 +189,10 @@ function OrdersList() {
               <span>Process</span>
             </button>
 
-            <button className="btn btn-danger ml-3">
+            <button
+              className="btn btn-danger ml-3"
+              onClick={() => deleteOrderHandler(order._id)}
+            >
               <i className="fa fa-times-circle mr-1"></i>
               <span>Delete</span>
             </button>
