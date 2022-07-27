@@ -15,6 +15,10 @@ import {
   PROCESS_ORDER_SUCCESS,
   PROCESS_ORDER_FAIL,
   PROCESS_ORDER_RESET,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAIL,
+  DELETE_ORDER_RESET,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 
@@ -129,6 +133,40 @@ export const processOrderReducer = (state = {}, action) => {
       };
     default:
       return state;
+  }
+};
+
+export const deleteOrderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_ORDER_SUCCESS:
+      return {
+        success: action.payload,
+        loading: false,
+      };
+    case DELETE_ORDER_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case DELETE_ORDER_RESET:
+      return {
+        ...state,
+        success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return {
+        ...state,
+      };
   }
 };
 

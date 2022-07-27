@@ -17,6 +17,9 @@ import {
   PROCESS_ORDER_SUCCESS,
   PROCESS_ORDER_FAIL,
   CLEAR_ERRORS,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAIL,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -124,6 +127,25 @@ export const processOrder = (id, orderData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PROCESS_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Delete order
+export const deleteOrder = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_ORDER_REQUEST });
+
+    const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
+
+    dispatch({
+      type: DELETE_ORDER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_ORDER_FAIL,
       payload: error.response.data.message,
     });
   }
