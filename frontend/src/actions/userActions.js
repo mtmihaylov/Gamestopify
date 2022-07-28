@@ -16,6 +16,9 @@ import {
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAIL,
   UPDATE_PASSWORD_REQUEST,
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAIL,
@@ -146,6 +149,35 @@ export const updateProfile = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Edit User in Admin Dashboard
+export const editUser = (id, userData) => async (dispatch) => {
+  try {
+    dispatch({ type: EDIT_USER_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/user/${id}`,
+      userData,
+      config
+    );
+
+    dispatch({
+      type: EDIT_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: EDIT_USER_FAIL,
       payload: error.response.data.message,
     });
   }

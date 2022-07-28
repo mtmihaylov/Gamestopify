@@ -11,6 +11,10 @@ import {
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAIL,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAIL,
+  EDIT_USER_RESET,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -83,24 +87,28 @@ export const userReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
+    case EDIT_USER_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case UPDATE_PROFILE_SUCCESS:
     case UPDATE_PASSWORD_SUCCESS:
+    case EDIT_USER_SUCCESS:
       return {
         ...state,
         loading: false,
         isUpdated: action.payload,
       };
     case PROFILE_IS_UPDATED_RESET:
+    case EDIT_USER_RESET:
       return {
         ...state,
         isUpdated: false,
       };
     case UPDATE_PROFILE_FAIL:
     case UPDATE_PASSWORD_FAIL:
+    case EDIT_USER_FAIL:
       return {
         ...state,
         loading: false,
