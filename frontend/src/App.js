@@ -27,6 +27,7 @@ import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductsList";
 import NewProduct from "./components/admin/NewProduct";
 import OrdersList from "./components/admin/OrdersList";
+import UsersList from "./components/admin/UsersList";
 
 import { loadUser } from "./actions/userActions";
 import { useDispatch } from "react-redux";
@@ -89,6 +90,7 @@ function App() {
         />
         <Route path="/admin/product" isAdmin={true} element={<NewProduct />} />
         <Route path="/admin/orders" isAdmin={true} element={<OrdersList />} />
+        <Route path="/admin/users" isAdmin={true} element={<UsersList />} />
       </Routes>
       {/* <Footer /> */}
     </div>
