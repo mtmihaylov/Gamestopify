@@ -11,9 +11,17 @@ import Sidebar from "./Sidebar";
 
 import { MDBDataTable } from "mdbreact";
 
-import { getAllUsers, editUser, clearErrors } from "../../actions/userActions";
+import {
+  getAllUsers,
+  editUser,
+  deleteUser,
+  clearErrors,
+} from "../../actions/userActions";
 
-import { EDIT_USER_RESET } from "../../constants/userConstants";
+import {
+  EDIT_USER_RESET,
+  DELETE_USER_RESET,
+} from "../../constants/userConstants";
 
 const UsersList = () => {
   const alert = useAlert();
@@ -24,6 +32,7 @@ const UsersList = () => {
   const {
     loading: editUserLoading,
     isUpdated,
+    isDeleted,
     error: editUserError,
   } = useSelector((state) => state.user);
 
@@ -52,7 +61,12 @@ const UsersList = () => {
       alert.success("User updated successfully");
       dispatch({ type: EDIT_USER_RESET });
     }
-  }, [dispatch, alert, error, editUserError, isUpdated]);
+
+    if (isDeleted) {
+      alert.success("User deleted successfully");
+      dispatch({ type: DELETE_USER_RESET });
+    }
+  }, [dispatch, alert, error, editUserError, isUpdated, isDeleted]);
 
   const [show, setShow] = useState(false);
 
@@ -82,6 +96,10 @@ const UsersList = () => {
     e.preventDefault();
 
     dispatch(editUser(userId, userForm)).then((res) => handleClose());
+  };
+
+  const deleteHandler = (id) => {
+    dispatch(deleteUser(id));
   };
 
   const setUsers = () => {
@@ -131,7 +149,10 @@ const UsersList = () => {
               <span>Edit</span>
             </button>
 
-            <button className="btn btn-danger ml-3">
+            <button
+              className="btn btn-danger ml-3"
+              onClick={() => deleteHandler(user._id)}
+            >
               <i className="fa fa-times-circle mr-1"></i>
               <span>Delete</span>
             </button>
