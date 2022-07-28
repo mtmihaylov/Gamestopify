@@ -246,14 +246,13 @@ function Profile() {
                     </button>
                   </Modal.Footer>
                 </Modal>
-                {user.role !== "admin" && (
-                  <Link
-                    to="/myprofile/orders"
-                    className="btn btn-danger btn-block mt-3 main-color"
-                  >
-                    My Orders
-                  </Link>
-                )}
+
+                <Link
+                  to="/myprofile/orders"
+                  className="btn btn-danger btn-block mt-3 main-color"
+                >
+                  My Orders
+                </Link>
 
                 <button
                   type="button"
