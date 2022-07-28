@@ -11,7 +11,9 @@ import Sidebar from "./Sidebar";
 
 import { MDBDataTable } from "mdbreact";
 
-import { getAllUsers, clearErrors } from "../../actions/userActions";
+import { getAllUsers, editUser, clearErrors } from "../../actions/userActions";
+
+import { EDIT_USER_RESET } from "../../constants/userConstants";
 
 const UsersList = () => {
   const alert = useAlert();
@@ -19,6 +21,19 @@ const UsersList = () => {
   const navigate = useNavigate();
 
   const { loading, users, error } = useSelector((state) => state.allUsers);
+  const {
+    loading: editUserLoading,
+    isUpdated,
+    error: editUserError,
+  } = useSelector((state) => state.user);
+
+  const [userForm, setUserForm] = useState({
+    name: "",
+    email: "",
+    role: "",
+  });
+
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -27,7 +42,47 @@ const UsersList = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error]);
+
+    if (editUserError) {
+      alert.error(editUserError);
+      dispatch(clearErrors());
+    }
+
+    if (isUpdated) {
+      alert.success("User updated successfully");
+      dispatch({ type: EDIT_USER_RESET });
+    }
+  }, [dispatch, alert, error, editUserError, isUpdated]);
+
+  const [show, setShow] = useState(false);
+
+  const handleShow = (id) => {
+    setShow(true);
+
+    const currentUser = users.find((user) => user._id === id);
+
+    setUserForm({
+      name: currentUser.name,
+      email: currentUser.email,
+      role: currentUser.role,
+    });
+
+    setUserId(id);
+  };
+  const handleClose = () => setShow(false);
+
+  const onChange = (e) => {
+    setUserForm({
+      ...setUserForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(editUser(userId, userForm)).then((res) => handleClose());
+  };
 
   const setUsers = () => {
     const data = {
@@ -68,7 +123,10 @@ const UsersList = () => {
         role: user.role,
         actions: (
           <>
-            <button className="btn btn-primary">
+            <button
+              className="btn btn-primary"
+              onClick={() => handleShow(user._id)}
+            >
               <i className="fa fa-pencil mr-1"></i>
               <span>Edit</span>
             </button>
@@ -108,6 +166,68 @@ const UsersList = () => {
                 striped
                 hover
               />
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Update User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form id="editUserForm" onSubmit={submitHandler}>
+                    <div className="form-group">
+                      <label htmlFor="name_field">Name</label>
+                      <input
+                        type="name"
+                        id="name_field"
+                        className="form-control"
+                        name="name"
+                        value={userForm.name}
+                        onChange={onChange}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="email_field">Email</label>
+                      <input
+                        type="email"
+                        id="email_field"
+                        className="form-control"
+                        name="email"
+                        value={userForm.email}
+                        onChange={onChange}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="role_field">Role</label>
+
+                      <select
+                        id="role_field"
+                        className="form-control"
+                        name="role"
+                        value={userForm.role}
+                        onChange={onChange}
+                      >
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                      </select>
+                    </div>
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <button
+                    type="submit"
+                    form="editUserForm"
+                    className="btn btn-primary btn-block"
+                    disabled={editUserLoading ? true : false}
+                  >
+                    {editUserLoading ? (
+                      <Spinner animation="border" variant="light" />
+                    ) : (
+                      "Save Changes"
+                    )}
+                  </button>
+                </Modal.Footer>
+              </Modal>
             </>
           )}
         </div>
