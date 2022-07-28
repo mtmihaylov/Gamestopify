@@ -186,7 +186,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id);
 
     const image_id = user.avatar.public_id;
-    const response = await cloudinary.v2.uploader.destroy(image_id);
+    await cloudinary.v2.uploader.destroy(image_id);
 
     const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
@@ -258,8 +258,6 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     role: req.body.role,
   };
 
-  // TODO: Update avatar
-
   const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
     runValidators: true,
@@ -280,7 +278,8 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User not found", 400));
   }
 
-  // TODO: Remove avatar from cloudinary
+  const image_id = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(image_id);
 
   await user.remove();
 
