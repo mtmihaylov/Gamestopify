@@ -15,6 +15,10 @@ import {
   EDIT_USER_SUCCESS,
   EDIT_USER_FAIL,
   EDIT_USER_RESET,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_RESET,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -88,6 +92,7 @@ export const userReducer = (state = {}, action) => {
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
     case EDIT_USER_REQUEST:
+    case DELETE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -100,15 +105,27 @@ export const userReducer = (state = {}, action) => {
         loading: false,
         isUpdated: action.payload,
       };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
     case PROFILE_IS_UPDATED_RESET:
     case EDIT_USER_RESET:
       return {
         ...state,
         isUpdated: false,
       };
+    case DELETE_USER_RESET:
+      return {
+        ...state,
+        isDeleted: false,
+      };
     case UPDATE_PROFILE_FAIL:
     case UPDATE_PASSWORD_FAIL:
     case EDIT_USER_FAIL:
+    case DELETE_USER_FAIL:
       return {
         ...state,
         loading: false,
