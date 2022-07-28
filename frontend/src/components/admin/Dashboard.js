@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAdminProducts } from "../../actions/productsActions";
 import { getAllOrders } from "../../actions/orderActions";
+import { getAllUsers } from "../../actions/userActions";
 
 const Dashboard = ({ isAdmin }) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Dashboard = ({ isAdmin }) => {
 
   const { products, loading } = useSelector((state) => state.products);
   const { orders, totalAmount } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStockProductsCount = 0;
   products.forEach((p) => {
@@ -33,6 +35,7 @@ const Dashboard = ({ isAdmin }) => {
 
     dispatch(getAllOrders());
     dispatch(getAdminProducts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (
@@ -55,7 +58,7 @@ const Dashboard = ({ isAdmin }) => {
                   <div className="card-body">
                     <div className="text-center card-font-size">
                       Total Amount
-                      <br /> <b>{`$${totalAmount}`}</b>
+                      <br /> <b>{`$${totalAmount?.toFixed(2)}`}</b>
                     </div>
                   </div>
                 </div>
@@ -108,7 +111,7 @@ const Dashboard = ({ isAdmin }) => {
                   <div className="card-body">
                     <div className="text-center card-font-size">
                       Users
-                      <br /> <b>0</b>
+                      <br /> <b>{users.length}</b>
                     </div>
                   </div>
                   <Link
