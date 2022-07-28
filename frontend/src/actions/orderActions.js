@@ -10,9 +10,6 @@ import {
   ALL_ORDERS_REQUEST,
   ALL_ORDERS_SUCCESS,
   ALL_ORDERS_FAIL,
-  ORDER_DETAILS_REQUEST,
-  ORDER_DETAILS_SUCCESS,
-  ORDER_DETAILS_FAIL,
   PROCESS_ORDER_REQUEST,
   PROCESS_ORDER_SUCCESS,
   PROCESS_ORDER_FAIL,
@@ -79,25 +76,6 @@ export const getAllOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_ORDERS_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// Get order details
-export const getOrderDetails = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: ORDER_DETAILS_REQUEST });
-
-    const { data } = await axios.get(`/api/v1/order/${id}`);
-
-    dispatch({
-      type: ORDER_DETAILS_SUCCESS,
-      payload: data.order,
-    });
-  } catch (error) {
-    dispatch({
-      type: ORDER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

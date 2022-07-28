@@ -19,7 +19,6 @@ import { cartReducer } from "./reducers/cartReducers";
 import {
   newOrderReducer,
   myOrdersReducer,
-  orderDetailsReducer,
   processOrderReducer,
   deleteOrderReducer,
   allOrdersReducer,
@@ -37,7 +36,6 @@ const rootReducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   allOrders: allOrdersReducer,
-  orderDetails: orderDetailsReducer,
   processOrder: processOrderReducer,
   deleteOrder: deleteOrderReducer,
   newReview: reviewReducer,
