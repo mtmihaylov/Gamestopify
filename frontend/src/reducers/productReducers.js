@@ -15,6 +15,10 @@ import {
   GET_REVIEWS_REQUEST,
   GET_REVIEWS_SUCCESS,
   GET_REVIEWS_FAIL,
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAIL,
+  DELETE_REVIEW_RESET,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
@@ -204,21 +208,25 @@ export const deleteProductReducer = (state = {}, action) => {
 export const reviewReducer = (state = {}, action) => {
   switch (action.type) {
     case NEW_REVIEW_REQUEST:
+    case DELETE_REVIEW_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case NEW_REVIEW_SUCCESS:
+    case DELETE_REVIEW_SUCCESS:
       return {
         success: action.payload,
         loading: false,
       };
     case NEW_REVIEW_FAIL:
+    case DELETE_REVIEW_FAIL:
       return {
         ...state,
         error: action.payload,
       };
     case NEW_REVIEW_RESET:
+    case DELETE_REVIEW_RESET:
       return {
         ...state,
         success: false,

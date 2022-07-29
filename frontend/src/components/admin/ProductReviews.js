@@ -11,7 +11,13 @@ import Sidebar from "./Sidebar";
 
 import { MDBDataTable } from "mdbreact";
 
-import { getProductReviews, clearErrors } from "../../actions/productsActions";
+import {
+  getProductReviews,
+  deleteReview,
+  clearErrors,
+} from "../../actions/productsActions";
+
+import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductReviews = () => {
   const alert = useAlert();
@@ -22,6 +28,12 @@ const ProductReviews = () => {
     (state) => state.productReviews
   );
 
+  const {
+    loading: deleteLoading,
+    success,
+    error: deleteError,
+  } = useSelector((state) => state.review);
+
   const [productId, setProductId] = useState("");
 
   useEffect(() => {
@@ -29,12 +41,27 @@ const ProductReviews = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, productId]);
+
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (success) {
+      alert.success("Review deleted successfully");
+      dispatch({ type: DELETE_REVIEW_RESET });
+      dispatch(getProductReviews(productId));
+    }
+  }, [dispatch, alert, error, deleteError, success]);
 
   const searchHandler = (e) => {
     e.preventDefault();
 
     dispatch(getProductReviews(productId));
+  };
+
+  const deleteHandler = (reviewId) => {
+    dispatch(deleteReview(reviewId, productId));
   };
 
   const setReviews = () => {
@@ -76,7 +103,10 @@ const ProductReviews = () => {
         comment: review.comment,
         actions: (
           <>
-            <button className="btn btn-danger ml-3">
+            <button
+              className="btn btn-danger ml-3"
+              onClick={() => deleteHandler(review._id)}
+            >
               <i className="fa fa-times-circle mr-1"></i>
               <span>Delete</span>
             </button>
