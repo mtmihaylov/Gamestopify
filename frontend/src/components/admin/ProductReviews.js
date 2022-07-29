@@ -52,7 +52,7 @@ const ProductReviews = () => {
       dispatch({ type: DELETE_REVIEW_RESET });
       dispatch(getProductReviews(productId));
     }
-  }, [dispatch, alert, error, deleteError, success]);
+  }, [dispatch, alert, error, deleteError, success, productId]);
 
   const searchHandler = (e) => {
     e.preventDefault();

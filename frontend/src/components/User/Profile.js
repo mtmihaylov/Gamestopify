@@ -19,7 +19,7 @@ import {
 import { PROFILE_IS_UPDATED_RESET } from "../../constants/userConstants";
 
 function Profile() {
-  const { loading, isAuthenticated, user } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
   const {
     error,
     isUpdated,
@@ -44,10 +44,6 @@ function Profile() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-
     if (user) {
       setUpdateProfileForm({
         name: user.name,
@@ -69,7 +65,7 @@ function Profile() {
         type: PROFILE_IS_UPDATED_RESET,
       });
     }
-  }, [dispatch, alert, error, isUpdated, user, navigate, isAuthenticated]);
+  }, [dispatch, alert, error, isUpdated, user, navigate]);
 
   const [showUpdateProfileForm, setShowUpdateProfileForm] = useState(false);
 

@@ -35,10 +35,6 @@ const ListOrders = () => {
   const [orderStatus, setOrderStatus] = useState("Processing");
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-
     dispatch(myOrders());
 
     if (error) {

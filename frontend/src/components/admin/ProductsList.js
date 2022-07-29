@@ -71,10 +71,6 @@ const ProductsList = () => {
   ];
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-
     dispatch(getAdminProducts());
 
     if (error) {

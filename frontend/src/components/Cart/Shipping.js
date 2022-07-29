@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
@@ -12,7 +12,6 @@ import { countries } from "countries-list";
 
 const Shipping = () => {
   const { shippingInfo } = useSelector((state) => state.cart);
-  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
@@ -24,12 +23,6 @@ const Shipping = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/login");
-  //   }
-  // }, [isAuthenticated, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

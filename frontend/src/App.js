@@ -22,6 +22,8 @@ import OrderSuccess from "./components/Cart/OrderSuccess";
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
 
+import ProtectedRoute from "./components/Route/ProtectedRoute";
+
 // Admin routes
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductsList";
@@ -65,37 +67,107 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/myprofile" element={<Profile />} />
+        <Route
+          path="/myprofile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/password/reset" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<NewPassword />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/shipping" element={<Shipping />} />
-        <Route path="/order/confirm" element={<ConfirmOrder />} />
-        {stripeApiKey && (
-          <Route
-            path="/payment"
-            element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
+        <Route
+          path="/shipping"
+          element={
+            <ProtectedRoute>
+              <Shipping />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/order/confirm"
+          element={
+            <ProtectedRoute>
+              <ConfirmOrder />
+            </ProtectedRoute>
+          }
+        />
+        {/* {stripeApiKey && ( */}
+        <Route
+          path="/payment"
+          element={
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtectedRoute>
                 <Payment />
-              </Elements>
-            }
-          />
-        )}
+              </ProtectedRoute>
+            </Elements>
+          }
+        />
+        {/* )} */}
         <Route path="/success" element={<OrderSuccess />} />
-        <Route path="/myprofile/orders" element={<ListOrders />} />
-        <Route path="/dashboard" isAdmin={true} element={<Dashboard />} />
+        <Route
+          path="/myprofile/orders"
+          element={
+            <ProtectedRoute>
+              <ListOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          isAdmin={true}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/admin/products"
           isAdmin={true}
-          element={<ProductsList />}
+          element={
+            <ProtectedRoute>
+              <ProductsList />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/admin/product" isAdmin={true} element={<NewProduct />} />
-        <Route path="/admin/orders" isAdmin={true} element={<OrdersList />} />
-        <Route path="/admin/users" isAdmin={true} element={<UsersList />} />
+        <Route
+          path="/admin/product"
+          isAdmin={true}
+          element={
+            <ProtectedRoute>
+              <NewProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          isAdmin={true}
+          element={
+            <ProtectedRoute>
+              <OrdersList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          isAdmin={true}
+          element={
+            <ProtectedRoute>
+              <UsersList />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/admin/reviews"
           isAdmin={true}
-          element={<ProductReviews />}
+          element={
+            <ProtectedRoute>
+              <ProductReviews />
+            </ProtectedRoute>
+          }
         />
       </Routes>
       {/* <Footer /> */}
