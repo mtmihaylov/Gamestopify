@@ -9,7 +9,7 @@ const Sidebar = () => {
         <ul className="list-unstyled components">
           <li>
             <Link to="/dashboard">
-              <i className="fa fa-tachometer"></i> Dashboard
+              <i className="fa fa-tachometer fa-fw"></i> Dashboard
             </Link>
           </li>
 
@@ -20,18 +20,18 @@ const Sidebar = () => {
               aria-expanded="false"
               className="dropdown-toggle"
             >
-              <i className="fa fa-product-hunt"></i> Products
+              <i className="fa fa-product-hunt fa-fw"></i> Products
             </a>
             <ul className="collapse list-unstyled" id="productSubmenu">
               <li>
                 <Link to="/admin/products">
-                  <i className="fa fa-clipboard"></i> All
+                  <i className="fa fa-clipboard fa-fw"></i> All
                 </Link>
               </li>
 
               <li>
                 <Link to="/admin/product">
-                  <i className="fa fa-plus"></i> Create
+                  <i className="fa fa-plus fa-fw"></i> Create
                 </Link>
               </li>
             </ul>
@@ -39,19 +39,19 @@ const Sidebar = () => {
 
           <li>
             <Link to="/admin/orders">
-              <i className="fa fa-shopping-basket"></i> Orders
+              <i className="fa fa-shopping-basket fa-fw"></i> Orders
             </Link>
           </li>
 
           <li>
             <Link to="/admin/users">
-              <i className="fa fa-users"></i> Users
+              <i className="fa fa-users fa-fw"></i> Users
             </Link>
           </li>
 
           <li>
             <Link to="/admin/reviews">
-              <i className="fa fa-star"></i> Reviews
+              <i className="fa fa-star fa-fw"></i> Reviews
             </Link>
           </li>
         </ul>

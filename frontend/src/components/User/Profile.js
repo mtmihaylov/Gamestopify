@@ -156,6 +156,7 @@ function Profile() {
                   className="btn btn-primary btn-block mt-5 main-color"
                   onClick={handleUpdateProfileFormShow}
                 >
+                  <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>{" "}
                   Edit Profile
                 </button>
                 <Modal
@@ -247,7 +248,7 @@ function Profile() {
                   to="/myprofile/orders"
                   className="btn btn-danger btn-block mt-3 main-color"
                 >
-                  My Orders
+                  <i className="fa fa-shopping-basket fa-fw"></i> {" My Orders"}
                 </Link>
 
                 <button
@@ -255,6 +256,7 @@ function Profile() {
                   className="btn btn-primary btn-block mt-3 main-color"
                   onClick={handleChangePasswordFormShow}
                 >
+                  <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>{" "}
                   Change Password
                 </button>
 
