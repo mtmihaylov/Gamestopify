@@ -27,7 +27,6 @@ const ProductsList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useSelector((state) => state.auth);
   const { loading, products, error } = useSelector((state) => state.products);
   const {
     error: deleteProductError,
@@ -101,7 +100,6 @@ const ProductsList = () => {
     }
   }, [
     dispatch,
-    isAuthenticated,
     navigate,
     error,
     alert,

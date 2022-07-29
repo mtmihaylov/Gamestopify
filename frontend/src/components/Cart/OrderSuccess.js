@@ -1,22 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import MetaData from "../layout/MetaData";
 
-import { useSelector } from "react-redux";
-
 const OrderSuccess = () => {
-  // const navigate = useNavigate();
-
-  // const { isAuthenticated } = useSelector((state) => state.auth);
-
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, isAuthenticated]);
-
   return (
     <>
       <MetaData title="Order placed successfully" />

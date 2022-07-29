@@ -16,7 +16,6 @@ const ListOrders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useSelector((state) => state.auth);
   const { loading, orders, error } = useSelector((state) => state.myOrders);
 
   const [orderForm, setOrderForm] = useState({
@@ -32,8 +31,6 @@ const ListOrders = () => {
     items: [],
   });
 
-  const [orderStatus, setOrderStatus] = useState("Processing");
-
   useEffect(() => {
     dispatch(myOrders());
 
@@ -41,7 +38,7 @@ const ListOrders = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, navigate, error, alert]);
+  }, [dispatch, navigate, error, alert]);
 
   const [show, setShow] = useState(false);
 

@@ -120,7 +120,7 @@ const NewProduct = () => {
               encType="multipart/form-data"
               onSubmit={submitHandler}
             >
-              <h1 className="mb-4">New Product</h1>
+              <h1 className="mb-4 text-center">New Product</h1>
 
               <div className="form-group">
                 <label htmlFor="name_field">Name</label>
