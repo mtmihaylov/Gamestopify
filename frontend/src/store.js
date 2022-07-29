@@ -6,6 +6,7 @@ import {
   productsReducer,
   productDetailsReducer,
   reviewReducer,
+  getReviewsReducer,
   newProductReducer,
   editProductReducer,
   deleteProductReducer,
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   processOrder: processOrderReducer,
   deleteOrder: deleteOrderReducer,
   newReview: reviewReducer,
+  productReviews: getReviewsReducer,
   newProduct: newProductReducer,
 });
 

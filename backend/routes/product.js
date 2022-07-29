@@ -28,6 +28,9 @@ router
   .delete(isAuthenticated, authorizeRoles("admin"), deleteProduct);
 
 router.route("/review").put(isAuthenticated, createReview);
-router.route("/reviews").get(getReviews).delete(isAuthenticated, deleteReview);
+router
+  .route("/admin/reviews")
+  .get(getReviews)
+  .delete(isAuthenticated, authorizeRoles("admin"), deleteReview);
 
 module.exports = router;

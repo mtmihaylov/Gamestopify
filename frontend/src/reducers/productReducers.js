@@ -12,6 +12,9 @@ import {
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
   NEW_REVIEW_RESET,
+  GET_REVIEWS_REQUEST,
+  GET_REVIEWS_SUCCESS,
+  GET_REVIEWS_FAIL,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
@@ -219,6 +222,36 @@ export const reviewReducer = (state = {}, action) => {
       return {
         ...state,
         success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export const getReviewsReducer = (state = { reviews: [] }, action) => {
+  switch (action.type) {
+    case GET_REVIEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_REVIEWS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        reviews: action.payload,
+      };
+    case GET_REVIEWS_FAIL:
+      return {
+        ...state,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {
