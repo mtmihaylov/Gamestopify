@@ -41,7 +41,7 @@ const rootReducer = combineReducers({
   allOrders: allOrdersReducer,
   processOrder: processOrderReducer,
   deleteOrder: deleteOrderReducer,
-  newReview: reviewReducer,
+  review: reviewReducer,
   productReviews: getReviewsReducer,
   newProduct: newProductReducer,
 });

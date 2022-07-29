@@ -31,9 +31,7 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const { error: reviewError, success } = useSelector(
-    (state) => state.newReview
-  );
+  const { error: reviewError, success } = useSelector((state) => state.review);
 
   // Variables for the stars in the review
   const [ratingValue, setRatingValue] = useState(0);
