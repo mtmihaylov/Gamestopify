@@ -92,7 +92,7 @@ const Payment = () => {
       });
 
       if (result.error) {
-        alert.error(result.error);
+        alert.error(result.error.message);
         setDisabled(false);
       } else {
         // If the paymenet is processed or not
