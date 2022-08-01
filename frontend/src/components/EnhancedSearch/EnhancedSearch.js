@@ -190,33 +190,23 @@ const EnhancedSearch = () => {
                 </div>
                 <div className="col-6 col-md-9">
                   <div className="row">
-                    {products &&
+                    {products && products.length > 0 ? (
                       products.map((product) => (
                         <ProductCard
                           key={product._id}
                           product={product}
                           col={4}
                         />
-                      ))}
+                      ))
+                    ) : (
+                      <img
+                        className="my-5 img-fluid d-block mx-auto"
+                        src="/images/no_results.png"
+                        alt="No Results"
+                      />
+                    )}
                   </div>
                 </div>
-                {/* {products.length > 0 ? (
-                  <div className="col-6 col-md-9">
-                    <div className="row">
-                      {products.map((product) => (
-                        <Product
-                          key={product._id}
-                          product={product}
-                          col={4}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <h2 className="flex-grow-1 text-center mt-5">
-                    Sorry, we couldn't find any results...
-                  </h2>
-                )} */}
               </>
             </div>
           </section>
