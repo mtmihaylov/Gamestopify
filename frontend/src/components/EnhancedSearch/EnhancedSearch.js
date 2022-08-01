@@ -26,9 +26,6 @@ const EnhancedSearch = () => {
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
 
-  const minInputRef = useRef(0);
-  const maxInputRef = useRef(5000);
-
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -42,6 +39,9 @@ const EnhancedSearch = () => {
   } = useSelector((state) => state.products);
 
   const { keyword } = useParams();
+
+  const minInputRef = useRef(0);
+  const maxInputRef = useRef(5000);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -59,7 +59,9 @@ const EnhancedSearch = () => {
     setCurrentPage(pageNumber);
   }
 
-  // TODO : Min Price and Max Price input handlers
+  const handleMinMaxPrice = () => {
+    setPrice([minInputRef.current.value, maxInputRef.current.value]);
+  };
 
   return (
     <div className="container container-fluid">
@@ -95,7 +97,10 @@ const EnhancedSearch = () => {
                           placeholder="$Max"
                         />
                       </div>
-                      <button className="btn btn-secondary ml-2 main-color">
+                      <button
+                        className="btn btn-secondary ml-2 main-color"
+                        onClick={() => handleMinMaxPrice()}
+                      >
                         Go
                       </button>
                     </div>
