@@ -5,6 +5,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
 import Home from "./components/Home";
+import EnhancedSearch from "./components/EnhancedSearch/EnhancedSearch";
 import ProductDetails from "./components/Product/ProductDetails";
 
 import Login from "./components/User/Login";
@@ -63,7 +64,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/search/:keyword" element={<Home />} />
+        <Route path="/search/:keyword" element={<EnhancedSearch />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
