@@ -67,17 +67,24 @@ const Header = () => {
                 aria-labelledby="dropDownMenuButton"
               >
                 <Link to="/myprofile" className="dropdown-item">
-                  <i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile
+                  <i className="fa fa-user fa-fw" aria-hidden="true"></i>{" "}
+                  Profile
                 </Link>
 
                 <Link to="/myprofile/orders" className="dropdown-item">
-                  <i class="fa fa-shopping-basket fa-fw" aria-hidden="true"></i>{" "}
+                  <i
+                    className="fa fa-shopping-basket fa-fw"
+                    aria-hidden="true"
+                  ></i>{" "}
                   Orders
                 </Link>
 
                 {user.role === "admin" && (
                   <Link to="/dashboard" className="dropdown-item">
-                    <i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>{" "}
+                    <i
+                      className="fa fa-tachometer fa-fw"
+                      aria-hidden="true"
+                    ></i>{" "}
                     Dashboard
                   </Link>
                 )}
@@ -89,7 +96,8 @@ const Header = () => {
                   className="dropdown-item text-danger"
                   onClick={logoutHandler}
                 >
-                  <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout
+                  <i className="fa fa-sign-out fa-fw" aria-hidden="true"></i>{" "}
+                  Logout
                 </Link>
               </div>
             </div>

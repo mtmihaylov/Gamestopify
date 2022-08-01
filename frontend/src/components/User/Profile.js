@@ -156,7 +156,10 @@ function Profile() {
                   className="btn btn-primary btn-block mt-5 main-color"
                   onClick={handleUpdateProfileFormShow}
                 >
-                  <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>{" "}
+                  <i
+                    className="fa fa-pencil-square-o fa-fw"
+                    aria-hidden="true"
+                  ></i>{" "}
                   Edit Profile
                 </button>
                 <Modal
@@ -256,7 +259,10 @@ function Profile() {
                   className="btn btn-primary btn-block mt-3 main-color"
                   onClick={handleChangePasswordFormShow}
                 >
-                  <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>{" "}
+                  <i
+                    className="fa fa-pencil-square-o fa-fw"
+                    aria-hidden="true"
+                  ></i>{" "}
                   Change Password
                 </button>
 
