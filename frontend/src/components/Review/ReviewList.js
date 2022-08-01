@@ -6,7 +6,7 @@ const ReviewList = ({ reviews }) => {
       <div className="reviews w-75 mt-5 ml-3">
         <h3>Other's Reviews:</h3>
         <hr />
-        {reviews &&
+        {reviews && reviews.length > 0 ? (
           reviews.map((review) => (
             <div className="review-card my-3" key={review._id}>
               <figure className="avatar avatar-nav">
@@ -27,7 +27,14 @@ const ReviewList = ({ reviews }) => {
 
               <hr />
             </div>
-          ))}
+          ))
+        ) : (
+          <img
+            className="my-5 img-fluid d-block mx-auto"
+            src="/images/no_reviews.png"
+            alt="No Reviews"
+          />
+        )}
       </div>
     </div>
   );
