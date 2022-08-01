@@ -116,10 +116,14 @@ const ProductDetails = () => {
                   product.images.map((image) => (
                     <Carousel.Item key={image.public_id}>
                       <img
-                        className="d-block w-100 h-100"
+                        className="d-block"
                         src={image.url}
                         alt={product.title}
-                        style={{ maxHeight: "300px" }}
+                        style={{
+                          width: "100%",
+                          height: "70vh",
+                          objectFit: "scale-down",
+                        }}
                       />
                     </Carousel.Item>
                   ))}
