@@ -9,6 +9,8 @@ import { useAlert } from "react-alert";
 
 import { createOrder, clearErrors } from "../../actions/orderActions";
 
+import { clearCart } from "../../actions/cartActions";
+
 import {
   useStripe,
   useElements,
@@ -103,6 +105,7 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
+          dispatch(clearCart());
 
           navigate("/success");
         } else {
