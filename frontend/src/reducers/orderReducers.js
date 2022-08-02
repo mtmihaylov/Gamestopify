@@ -89,12 +89,13 @@ export const processOrderReducer = (state = {}, action) => {
     case PROCESS_ORDER_FAIL:
       return {
         ...state,
+        loading: false,
         error: action.payload,
       };
     case PROCESS_ORDER_RESET:
       return {
         ...state,
-        loading: false,
+        success: false,
       };
     case CLEAR_ERRORS:
       return {
