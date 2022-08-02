@@ -50,7 +50,7 @@ function OrdersList() {
     },
     amount: "",
     payment: "",
-    striepId: "",
+    stripeId: "",
     status: "",
     items: [],
   });
@@ -117,7 +117,7 @@ function OrdersList() {
       },
       amount: currentOrder.totalPrice,
       payment: currentOrder.paymentInfo.status === "succeeded" ? true : false,
-      striepId: currentOrder.paymentInfo.id,
+      stripeId: currentOrder.paymentInfo.id,
       status: currentOrder.orderStatus,
       items: currentOrder.orderItems,
     });
@@ -292,7 +292,7 @@ function OrdersList() {
 
                     <h4 className="my-4">Stripe ID</h4>
                     <p className="greenColor">
-                      <b>{orderForm.striepId}</b>
+                      <b>{orderForm.stripeId}</b>
                     </p>
 
                     <h4 className="my-4">Order Status</h4>
