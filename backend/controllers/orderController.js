@@ -1,5 +1,5 @@
 const Order = require("../models/orders");
-const Product = require("../models/product");
+const { Product } = require("../models/product");
 
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
@@ -87,7 +87,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   }
 
   order.orderItems.forEach(async (item) => {
-    await updateStock(item.product, item.quantity);
+    await updateStock(item.id, item.quantity);
   });
 
   order.orderStatus = req.body.orderStatus;
