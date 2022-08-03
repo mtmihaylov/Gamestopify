@@ -8,7 +8,7 @@
 
 <b>Products Features</b>
 
-| Feature          |  Coded?  | Description                                        |
+| Feature          |   Done   | Description                                        |
 | ---------------- | :------: | :------------------------------------------------- |
 | Add a Product    | &#10004; | Add a Product to the database                      |
 | Edit a Product   | &#10004; | Edit a Products details                            |
@@ -18,13 +18,13 @@
 
 <b>Search Features</b>
 
-| Feature              |  Coded?  | Description                                    |
+| Feature              |   Done   | Description                                    |
 | -------------------- | :------: | :--------------------------------------------- |
 | Search for a Product | &#10004; | Search for a product by a number of properties |
 
 <b>Cart Features</b>
 
-| Feature     |  Coded?  | Description                  |
+| Feature     |   Done   | Description                  |
 | ----------- | :------: | :--------------------------- |
 | See Cart    | &#10004; | See the items in the Cart    |
 | Add Item    | &#10004; | Add a new item to the Cart   |
@@ -32,13 +32,13 @@
 
 <b>Purchase Features</b>
 
-| Feature  |  Coded?  | Description         |
+| Feature  |   Done   | Description         |
 | -------- | :------: | :------------------ |
 | Checkout | &#10004; | Ability to Checkout |
 
 <b>Order Features</b>
 
-| Feature          |  Coded?  | Description                                 |
+| Feature          |   Done   | Description                                 |
 | ---------------- | :------: | :------------------------------------------ |
 | Create an Order  | &#10004; | Create an order after a successful purchase |
 | Process an Order | &#10004; | View Order Details/Change Order status      |
@@ -46,7 +46,7 @@
 | List Orders      | &#10004; | List Orders                                 |
 
 <b>Admin Features</b>
-| Feature | Coded? | Description |
+| Feature | Done | Description |
 |----------|:-------------:|:-------------|
 | Dashboard | &#10004; | View all products, orders and users and edit/update them |
 
