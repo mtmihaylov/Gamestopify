@@ -2,6 +2,12 @@
 
 :point_right:[Link To Heroku Host](https://gamestopify.herokuapp.com/):point_left:
 
+#### For an admin account use:
+
+| Email           | Password |
+| --------------- | :------: |
+| admin@gmail.com |  123456  |
+
 ### :handbag: Complete E-Commerce app built with Node.js, React, Redux, Express, MongoDB
 
 ## Features
@@ -15,6 +21,13 @@
 | Delete a Product | &#10004; | Delete a Product from the database                 |
 | List Products    | &#10004; | List all Products                                  |
 | Update Stock     | &#10004; | Update the stock after an order has been processed |
+
+<b>Review Features</b>
+
+| Feature       |   Done   | Description                   |
+| ------------- | :------: | :---------------------------- |
+| Post a Review | &#10004; | Rate and review a product     |
+| List Reviews  | &#10004; | List all reviews of a product |
 
 <b>Search Features</b>
 
@@ -46,8 +59,9 @@
 | List Orders      | &#10004; | List Orders                                 |
 
 <b>Admin Features</b>
-| Feature | Done | Description |
-|----------|:-------------:|:-------------|
+
+| Feature   |   Done   | Description                                              |
+| --------- | :------: | :------------------------------------------------------- |
 | Dashboard | &#10004; | View all products, orders and users and edit/update them |
 
 ## Installation
