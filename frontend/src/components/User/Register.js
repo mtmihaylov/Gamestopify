@@ -37,6 +37,9 @@ const Register = () => {
     }
 
     if (error) {
+      if (error === "Login to access this resource.") {
+        return;
+      }
       alert.error(error);
       dispatch(clearErrors());
     }
