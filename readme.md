@@ -12,6 +12,17 @@
 
 ## Features
 
+<b>User Features</b>
+
+| Feature        |   Done   | Description                    |
+| -------------- | :------: | :----------------------------- |
+| Register       | &#10004; | Create an account              |
+| Login          | &#10004; | Login to the app               |
+| Edit Profile   | &#10004; | Edit profile details           |
+| Edit Password  | &#10004; | Change password                |
+| Reset Password | &#10004; | Get an email with a reset link |
+| View Orders    | &#10004; | View all your placed orders    |
+
 <b>Products Features</b>
 
 | Feature          |   Done   | Description                                        |
