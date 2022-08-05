@@ -6,7 +6,7 @@ import { logout } from "../../actions/userActions";
 
 import Search from "./Search";
 
-import "../../App.css";
+import "./Header.css";
 
 const Header = () => {
   const alert = useAlert();

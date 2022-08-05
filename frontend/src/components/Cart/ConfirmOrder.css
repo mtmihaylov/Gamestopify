@@ -1,0 +1,8 @@
+.order-confirm p,
+.order-details p {
+  margin-left: 1.5rem;
+}
+
+.order-status {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+}

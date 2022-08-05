@@ -1,15 +1,14 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
 
 import { addToCart, removeItem } from "../../actions/cartActions";
 
-import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 
+import "./Cart.css";
+
 const Cart = () => {
-  const alert = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

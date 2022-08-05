@@ -1,5 +1,7 @@
 import React, { useEffect, Fragment, useState, useRef } from "react";
 
+import "./EnhancedSearch.css";
+
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 

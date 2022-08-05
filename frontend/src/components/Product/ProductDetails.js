@@ -20,6 +20,8 @@ import MetaData from "../layout/MetaData";
 
 import ReviewList from "../Review/ReviewList";
 
+import "./ProductDetails.css";
+
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 

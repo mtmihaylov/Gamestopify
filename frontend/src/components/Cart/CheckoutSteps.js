@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./CheckoutSteps.css";
+
 import { Link } from "react-router-dom";
 
 const CheckoutSteps = ({ shipping, confirmOrder, payment }) => {

@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Search.css";
 
 const Search = () => {
-  const [ keyword, setKeyword ] = useState('')
+  const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
 
   const searchHandler = (e) => {
     e.preventDefault();
 
     if (keyword.trim()) {
-      navigate(`/search/${keyword}`)
+      navigate(`/search/${keyword}`);
     } else {
-      navigate('/')
+      navigate("/");
     }
-  }
+  };
 
   return (
     <div className="col-12 col-md-6 mt-2 mt-md-0">

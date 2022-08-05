@@ -1,14 +1,13 @@
-import React, { Fragment } from "react";
+import React from "react";
+import "./Footer.css";
 
 const Footer = () => {
   return (
-    <Fragment>
+    <>
       <footer className="py-1">
-        <p className="text-center mt-1">
-          GameStop - 2022, All Rights Reserved
-        </p>
+        <p className="text-center mt-1">GameStop - 2022, All Rights Reserved</p>
       </footer>
-    </Fragment>
+    </>
   );
 };
 

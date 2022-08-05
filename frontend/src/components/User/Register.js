@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "./Register.css";
+
 import MetaData from "../layout/MetaData";
 import { Spinner } from "react-bootstrap";
 
@@ -81,7 +83,7 @@ const Register = () => {
               onSubmit={submitHandler}
               encType="multipart/form-data"
             >
-              <h1 className="mb-3">Register</h1>
+              <h1 className="mb-3 text-center">Register</h1>
 
               <div className="form-group">
                 <label htmlFor="email_field">Name</label>

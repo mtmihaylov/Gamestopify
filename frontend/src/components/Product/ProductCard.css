@@ -1,0 +1,79 @@
+#products_heading {
+  margin-top: 1.8rem;
+}
+
+.product-card {
+  height: 100%;
+  transition: all .2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.07); 
+}
+
+.card-title a {
+  color: #2e2e2e;
+}
+
+.card-title a:hover {
+  color: #fa9c23;
+  text-decoration: none;
+}
+
+.card-text {
+  font-size: 1.4rem;
+}
+
+.card-body {
+  padding: 20px 0px 5px 0px;
+}
+
+#view_btn {
+  background-color: #fa9c23;
+  color: white;
+  padding: 0.4rem 1.8rem;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 30vh;
+  object-fit: scale-down;
+}
+
+.ratings {
+  font-size: 1.2rem;
+  color: #fdcc0d;
+}
+
+#no_of_reviews {
+  font-size: 0.85rem;
+  color: grey;
+  margin-left: 0.5rem;
+}
+
+/* Rating Stars */
+
+.rating-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  color: #fdcc0d;
+}
+
+.rating-outer::before {
+  content: '\f006 \f006 \f006 \f006 \f006';
+}
+
+.rating-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.rating-inner::before {
+  content: '\f005 \f005 \f005 \f005 \f005';
+  color: #f8ce0b;
+}

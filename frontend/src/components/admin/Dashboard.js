@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import "./Dashboard.css";
+
 import { Link, useNavigate } from "react-router-dom";
 
 import Loader from "../layout/Loader";

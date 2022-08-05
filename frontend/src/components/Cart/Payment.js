@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import "./Payment.css";
+
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 
